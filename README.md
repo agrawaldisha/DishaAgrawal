@@ -1,72 +1,55 @@
-# 🧭 DishaAgrawal — Learning in Public
+# Disha Agrawal
 
-> *"The best way to learn is to never stop being curious."*
-
-Welcome to my digital notebook — a living, breathing repository of everything I'm exploring, experimenting with, and figuring out. If you're here, you probably love learning too.
+**Data & AI Engineer** · Learning in public · Building at the intersection of data engineering and generative AI
 
 ---
 
-## 👋 About This Repo
+## About
 
-This isn't a polished portfolio. It's a **curiosity-driven collection** of everything I'm actively diving into — messy drafts, working experiments, half-baked ideas, and the occasional breakthrough. Every folder is a rabbit hole I went down and decided to document.
+This repository is a curated collection of my hands-on explorations across the modern data and AI stack. Each folder represents a domain I'm actively studying — with working code, experiments, and notes from real implementations rather than tutorials.
 
-I believe in **learning by doing**, and this repo is proof of that.
-
----
-
-## 🗂️ What's Inside
-
-| Folder | What I'm Exploring |
-|--------|-------------------|
-| 🧱 `DataBricks` | Distributed data processing, Delta Lake, and large-scale pipelines |
-| 🤖 `GenAI` | Generative AI — prompting, RAG, agents, and LLM experiments |
-| 🗄️ `SQL` | Query optimization, window functions, and analytical patterns |
-| ❄️ `Snowflake` | Cloud data warehousing, performance tuning, and data sharing |
-| 🐍 `python` | Scripts, utilities, automation, and whatever I'm building this week |
+I'm a firm believer that the best way to develop expertise is to build, break, and document things along the way.
 
 ---
 
-## 🔍 My Learning Philosophy
+## Repository Structure
 
-```
-Curiosity first. → Experiment next. → Reflect always.
-```
+### `DataBricks/`
+Distributed computing, Delta Lake architecture, and large-scale data pipeline design using Apache Spark on Databricks. Includes notebook experiments, optimization patterns, and workflow orchestration examples.
 
-I don't wait until I'm an "expert" to share something. I share as I go — because that's how real learning happens.
+### `GenAI/`
+Generative AI explorations — prompt engineering, retrieval-augmented generation (RAG), LLM application development, and agent frameworks. This folder is growing fast.
 
-- 🔬 I learn by **building things**, not just reading about them
-- 💡 I chase **connections between domains** (why does this SQL concept feel like that Python pattern?)
-- 📝 I document **the journey**, not just the destination
-- 🤝 I believe **open learning** helps everyone level up
+### `SQL/`
+Advanced SQL patterns: window functions, query optimization, analytical modeling, and complex data transformations across relational systems.
 
----
+### `Snowflake/`
+Cloud data warehousing with Snowflake — performance tuning, data sharing, Snowpark, and integrating Snowflake into broader data platforms.
 
-## 🚀 Current Focus
-
-- 🤖 Diving deep into **Generative AI** — building applications, not just calling APIs
-- ⚡ Exploring **async Python** patterns for real-world data workflows
-- 🔗 Connecting the dots between **data engineering** (Snowflake, Databricks) and **AI applications**
+### `python/`
+Python scripts, utilities, and standalone applications — ranging from automation tools to async programming patterns and data processing pipelines.
 
 ---
 
-## 📈 The Goal
+## Focus Areas
 
-This repo grows as I grow. Every commit is a step forward. Every new folder is a new obsession.
-
-If you find something useful here — great! If you spot something I got wrong — even better. Open an issue, I'd love to discuss it.
-
----
-
-## 🌱 Always Learning
-
-```
-Today's curiosity → Tomorrow's capability
-```
-
-*Last updated: Actively — check the commits!*
+- **Data Engineering** — building reliable, scalable pipelines across cloud platforms
+- **Generative AI** — moving beyond API calls to production-ready AI applications
+- **Cloud Data Platforms** — Snowflake, Databricks, and the modern data stack
+- **Python Development** — clean, efficient code for real-world data problems
 
 ---
 
-<p align="center">
-  <em>Built with curiosity. Documented with honesty. Shared with hope.</em>
-</p>
+## Philosophy
+
+This repo grows incrementally with my learning. Commits reflect genuine progress — not polished final products. If something here is useful to you, great. If you spot something worth improving, even better — feel free to open an issue.
+
+---
+
+## Connect
+
+If you're working on similar problems or want to exchange ideas, feel free to reach out.
+
+---
+
+*Actively maintained · Updated regularly*
