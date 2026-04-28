@@ -404,4 +404,4 @@ The three strongest moments to highlight during the live demo are:
 *Demo prepared for: Snowflake Snowpipe Streaming with Apache Kafka | RideFlow Use Case*
 
 
--- my doc:- https://docs.google.com/document/d/1nt62skfDasIqvJsBfkh5-PAblfkNJHuB7trKPoy45BE/edit?tab=t.f5e4fa7p468o#heading=h.ngwtnsd34i14
+s3 integration accurate process:- https://gemini.google.com/app/c170c3361d3f1eca
