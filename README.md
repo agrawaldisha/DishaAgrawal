@@ -1,4 +1,3 @@
-I am supposed to give this ppt as part of organizartion professional ppt , you are supposed to format my ppt with the same contnet on each slide as per my template , colour, font style , font size, design everything from template and bring my ppt in proper formmated professional manner for the same contnent on each slide you are allowed to correct the wrong things
 # Disha Agrawal
 
 **Data & AI Engineer** · Learning in public · Building at the intersection of data engineering and generative AI
