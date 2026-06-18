@@ -1,0 +1,779 @@
+What is the definition of generative AI?
+
+A. A type of predictive model that estimates a relationship by fitting a line to the observed data.
+B. A type of artificial intelligence that can create new content and ideas, including text, images, music, and code.
+C. A type of machine learning algorithm inspired by the human brain that is made up of interconnected nodes.
+D. A type of artificial intelligence that enables a system to autonomously learn and improve using neural networks and deep learning.
+
+ans:- B
+
+A company wants to use an AI agent to automate some tasks. They want everyone to understand the different functions of an AI agent. What is the function of an AI agent in the context of gen AI?
+
+A. To provide the computational resources needed to train and run gen AI models.
+B. To store and manage large datasets used for training and running gen AI models.
+C. To provide a user-friendly interface for interacting with gen AI models.
+D. To analyze situations, use multiple tools, and make informed decisions without requiring constant human input.
+
+ans:- D
+
+What is the definition of an AI agent?
+
+A. An application that learns how to achieve a goal based on inputs and tools available to it.
+B. A human expert who oversees and manages the operation of a gen AI application.
+C. A type of user interface that allows users to interact with a gen AI application.
+D. A static component of a gen AI application that provides information to the user.
+
+ans:- A 
+
+A company is developing an AI character for a video game. The AI character needs to learn how to navigate a complex environment and make decisions to achieve certain objectives within the game. When the AI takes actions that lead to positive outcomes like finding a reward or overcoming an obstacle, it receives a positive score. When it takes actions that lead to negative outcomes, like hitting a wall or losing progress, it receives a negative score. Through this process of trial and error, the AI gradually improves the character’s ability to play the game effectively. What machine learning should the company use?
+
+A. Unsupervised learning
+B. Reinforcement learning
+C. Supervised learning
+D. Deep learning
+
+ans:- b 
+
+A research team has collected a large dataset of sensor readings from various industrial machines. This dataset includes measurements like temperature, pressure vibration levels and electrical current recorded at regular intervals. The team has not yet assigned any labels or categories to these readings and wants to identify potential anomalies, malfunctions or natural groupings of machine behavior based on the sensor data alone. What type of machine learning should they use?
+
+A. Deep learning
+B. Reinforcement learning
+C. Supervised learning
+D. Unsupervised learning
+ans:- d 
+
+A company wants to choose a generative AI (gen AI) use case that will be successful and have the most impact. What Key factor should they determine first according to Google Cloud- recommended practices?
+
+A. The number of employees who will be trained to use the new gen AI tools.
+B. The availability of pre-trained models that are offered on various cloud computing platforms.
+C. The frequency of updates to the underlying foundation models used by different gen AI platforms.
+D. The specific business problems the company aims to solve and the desired outcomes.
+
+ans:- d 
+
+What is an example of unsupervised machine learning?
+
+A. Predicting subscription renewal based on past renewal status data.
+B. Training a system to recognize product images using labeled categories.
+C. Analyzing customer purchase patterns to identify natural groupings.
+D. Forecasting sales figures using historical sales and marketing spend.
+ans:- c 
+
+A company wants to create an AI-powered educational solution that provides personalized learning experiences for students. This platform will assess a student’s knowledge, recommend relevant learning materials and generate personalized exercises. The application would provide the structure for lessons and track progress. What type of AI solution should they use?
+
+A. A learning management system (LMS)
+B. A customized learning agent
+C. An AI-powered recommendation system for learning resources
+D. A large language model fine-tuned on educational content
+
+ans:- b 
+
+A company’s development team is eager to start building generative AI solutions with Google Cloud, but has limited experience in AI development. They need to launch their gen AI solution quickly. What Google Cloud benefit would help the company achieve their goal?
+
+A. Google Cloud’s pre-trained models and low- and no-code AI tools and services.
+B. Google Cloud’s focus on continuous improvement provides access to the latest AI tools, features, and best practices.
+C. Google Cloud’s comprehensive training materials and tutorials to help developers.
+D. Google Cloud’s collaborative AI community and support forums connect developers with AI experts.
+
+ans:- A
+
+A large multinational corporation with geographically dispersed teams struggles with knowledge silos and inconsistent access to crucial internal information. What is a key business benefit of using Google Agentspace in this scenario?
+
+A. Automation of employee performance reviews using AI.
+B. Seamless knowledge sharing and collaboration across internal systems.
+C. Improved IT infrastructure management across offices.
+D. Enhanced data encryption and compliance for internal communications.
+
+ans:- b 
+
+A marketing team wants to use a foundation model to create social media and advertising campaigns. They want to create written articles and images from text. They lack deep AI expertise and need a versatile solution. Which Google foundation model should they use?
+
+A. Gemini
+B. Gemma
+C. Veo
+D. Imagen
+
+ans:- a 
+
+A data science team needs a centralized and organized location to store its various model versions, track their metadata, and easily deploy them to the respective applications. What Google Cloud service should they use?
+
+A. Cloud Storage
+B. Verte AI Pipelines
+C. BigQuery
+D. Model Registry
+
+ans;- D
+
+What is a characteristic of Google Cloud as a generative AI company?
+
+A. Google Cloud relies on proprietary, closed-source AI technologies for maximum security benefits.
+B. Google Cloud has an AI-first focus that enables innovation, with continuous updates and broad integration across its platform.
+C. Google Cloud ensures that all generative AI models and data are completely secured and isolated from external networks.
+D. Google Cloud provides fully autonomous AI agents that require zero configuration or management overhead.
+
+
+ans:- b 
+
+What will Google Cloud’s Agent Assist help a company achieve?
+
+A. The ability to analyze conversational data to identify customer sentiment, common topics of discussion, and insights into agent performance and customer experience.
+B. The ability to provide real-time assistance and recommended responses to live customer service agents during their interactions.
+C. The infrastructure to provide an enterprise-grade contact center solution with omnichannel support, routing, and integration with CRM systems.
+D. The ability to build and deploy deterministic and generative chatbot agents for automated customer support.
+
+ans:- b 
+
+A company wants a generative AI platform that provides the infrastructure, tools, and pre-trained models needed to build, deploy, and manage its generative AI solutions. Which Google Cloud offering should the company use?
+
+A. BigQuery
+B. Google Kubernetes Engine (GKE)
+C. Google Cloud Storage
+D. Vertex AI
+
+ans:- d 
+
+A company is exploring Google Agentspace to improve how its employees search for information on their enterprise systems and automate certain tasks. What is the key business advantage of using Agentspace?
+
+A. Enhanced real-time communication and collaboration among team members.
+B. More granular control over support team access and permissions for sensitive data.
+C. Improved productivity and data interaction using AI assistants and advanced document analysis.
+D. Greater interoperability with legacy software systems and databases.
+
+ans:- c 
+
+An organization wants granular control over who can use and see their generative AI models and related resources on Google Cloud. Which Google Cloud security offering is specifically for this purpose?
+
+A. Workload monitoring tools.
+B. Secure-by-design infrastructure.
+C. Identity and Access Management.
+D. Security Command Center.
+
+ans:- c 
+
+A large ecommerce company with a substantial product catalog and many support documents has customers struggling to find information on their website. This leads to high support costs and poor user experience. The company wants a Google Cloud solution to improve website search and reduce support costs while improving customer satisfaction. What Google Cloud product should the company use?
+
+A. Google Shopping
+B. Google Search
+C. Vertex AI Search
+D. Vertex AI Platform
+
+ans:- C
+
+A company wants to adopt generative AI and is concerned about vendor lock-in. They want to maintain flexibility in their technology stack. What Google Cloud strength would ease their concerns?
+
+A. Google Cloud’s strict adherence to proprietary technologies ensures the highest level of security and performance.
+B. Google Cloud’s AI solutions are pre-packaged for easy deployment, eliminating the need for customization and integration efforts.
+C. Google Cloud’s AI solutions have an open approach that supports customer choice across offerings.
+D. Google Cloud’s focus on automation aims to replace human jobs with AI systems, potentially leading to significant workforce reductions
+
+ans:- c 
+
+A company’s sales team spends a significant amount of time researching potential leads and manually entering data into their customer relationship management (CRM) tool. They want to improve the team’s efficiency and enable them to focus on building relationships and closing deals. What should the organization do?
+
+A. Develop a custom AI solution using Google Cloud’s AutoML Natural Language to analyze lead communications and automatically update the CRM.
+B. Implement Google Cloud’s Contact Center AI to qualify leads and route them to the appropriate sales representatives.
+C. Implement Google Agentspace "unified enterprise search" including a CRM agent to automate lead research and data entry.
+D. Integrate the CRM with a popular sales intelligence platform to automatically enrich lead profiles with valuable data.
+
+ans:- c 
+
+A logistics company wants to use a generative AI (gen AI) agent to automatically check real-time inventory levels across its warehouses and adjust delivery schedules. The gen AI agent needs access to internal inventory data. They want the most cost-effective solution. What should the organization do?
+
+A. Build a custom API instead of using the gen AI agent.
+B. Use pre-built gen AI chatbots for inventory questions.
+C. Use Vertex AI Studio to fine-tune a model with sample inventory data.
+D. Use Google Cloud databases and Vertex AI for the agent to get live data.
+
+ans:- d 
+
+
+An organization needs an AI tool to analyze and summarize lengthy customer feedback text transcripts. You need to choose a Google foundation model with a large context window. What foundation model should the organization choose?
+
+A. Gemini
+B. CodeGemma
+C. Imagen
+D. Chirp
+
+ans:-  A
+
+A large e-commerce company with a vast and frequently updated product catalog finds that customers struggle to find products on their website, and support agents speed too much time finding detailed product information. The company wants to improve search accuracy and efficiency for both customers and support. What Google Cloud solution should they use?
+
+A. Vertex AI Conversation
+B. Vertex AI Natural Language API
+C. Pre-built RAG with VERTEX AI Search
+D. Vertex AI Model Garden
+
+ans:-  C
+
+An organization wants to quickly experiment with different Gemini models and parameters for content creation without a complex setup. What service should the organization use for this initial exploration?
+
+A. Vertex AI Studio
+B. Vertex AI Prediction
+C. Google AI Studio
+D. Gemini for Google Workspace
+ans:-  C
+
+A Generative AI Engineer is tasked with deploying an application that takes advantage of a custom MLflow Pyfunc model to return some interim results.
+How should they configure the endpoint to pass the secrets and credentials?
+
+A. Use spark.conf.set ()
+B. Pass variables using the Databricks Feature Store API
+C. Add credentials using environment variables
+D. Pass the secrets in plain text
+
+ans:-  C
+
+A Generative AI Engineer wants to build an LLM-based solution to help a restaurant improve its online customer experience with bookings by automatically handling common customer inquiries. The goal of the solution is to minimize escalations to human intervention and phone calls while maintaining a personalized interaction. To design the solution, the Generative AI Engineer needs to define the input data to the LLM and the task it should perform.
+Which input/output pair will support their goal?
+
+A. Input: Online chat logs; Output: Group the chat logs by users, followed by summarizing each user’s interactions
+B. Input: Online chat logs; Output: Buttons that represent choices for booking details
+C. Input: Customer reviews; Output: Classify review sentiment
+D. Input: Online chat logs; Output: Cancellation options
+
+ans:- B
+
+
+What is an effective method to preprocess prompts using custom code before sending them to an LLM?
+
+A. Directly modify the LLM’s internal architecture to include preprocessing steps
+B. It is better not to introduce custom code to preprocess prompts as the LLM has not been trained with examples of the preprocessed prompts
+C. Rather than preprocessing prompts, it’s more effective to postprocess the LLM outputs to align the outputs to desired outcomes
+D. Write a MLflow PyFunc model that has a separate function to process the prompts
+
+ans:- D
+
+A finance team wants to use Gemma to help with daily tasks so that the financial analysts can focus on other work. Which business problem can Gemma most efficiently address?
+
+A. The struggle to accurately extract key financial figures and insights from a variety of document formats, such as balance sheets and income statements, for quick reporting.
+B. The complexity of building and deploying sophisticated internal knowledge bases to answer employees’ finance-related questions with accurate and up-to-date information.
+C. The difficulty in analyzing large datasets of financial transactions and market data to identify anomalies and predict future financial performance.
+D. The challenge of efficiently producing high-quality written summaries and initial drafts of financial communications.
+
+ans:- d 
+
+Which indicator should be considered to evaluate the safety of the LLM outputs when qualitatively assessing LLM responses for a translation use case?
+
+A. The ability to generate responses in code
+B. The similarity to the previous language
+C. The latency of the response and the length of text generated
+D. The accuracy and relevance of the responses
+
+ans:- d 
+
+A Generative AI Engineer is developing a patient-facing healthcare-focused chatbot. If the patient’s question is not a medical emergency, the chatbot should solicit more information from the patient to pass to the doctor’s office and suggest a few relevant pre-approved medical articles for reading. If the patient’s question is urgent, direct the patient to calling their local emergency services.
+Given the following user input:
+“I have been experiencing severe headaches and dizziness for the past two days.”
+Which response is most appropriate for the chatbot to generate?
+
+A. Here are a few relevant articles for your browsing. Let me know if you have questions after reading them.
+B. Please call your local emergency services.
+C. Headaches can be tough. Hope you feel better soon!
+D. Please provide your age, recent activities, and any other symptoms you have noticed along with your headaches and dizziness.
+
+ans:- b 
+
+After changing the response generating LLM in a RAG pipeline from GPT-4 to a model with a shorter context length that the company self-hosts, the Generative AI Engineer is getting the following error:
+image8
+What TWO solutions should the Generative AI Engineer implement without changing the response generating model? (Choose two.)
+
+A. Use a smaller embedding model to generate embeddings
+B. Reduce the maximum output tokens of the new model
+C. Decrease the chunk size of embedded documents
+D. Reduce the number of records retrieved from the vector database
+E. Retrain the response generating model using ALiBi
+
+ans:- c,d 
+
+A Generative Al Engineer is building a system which will answer questions on latest stock news articles.
+Which will NOT help with ensuring the outputs are relevant to financial news?
+
+A. Implement a comprehensive guardrail framework that includes policies for content filters tailored to the finance sector.
+B. Increase the compute to improve processing speed of questions to allow greater relevancy analysis
+C. Implement a profanity filter to screen out offensive language.
+D. Incorporate manual reviews to correct any problematic outputs prior to sending to the users
+
+ans:- b 
+
+A Generative Al Engineer is building a RAG application that answers questions about internal documents for the company SnoPen AI.
+The source documents may contain a significant amount of irrelevant content, such as advertisements, sports news, or entertainment news, or content about other companies.
+Which approach is advisable when building a RAG application to achieve this goal of filtering irrelevant information?
+
+A. Keep all articles because the RAG application needs to understand non-company content to avoid answering questions about them.
+B. Include in the system prompt that any information it sees will be about SnoPenAI, even if no data filtering is performed.
+C. Include in the system prompt that the application is not supposed to answer any questions unrelated to SnoPen AI.
+D. Consolidate all SnoPen AI related documents into a single chunk in the vector database.
+
+ans:- c 
+
+A Generative Al Engineer has successfully ingested unstructured documents and chunked them by document sections. They would like to store the chunks in a Vector Search index. The current format of the dataframe has two columns: (i) original document file name (ii) an array of text chunks for each document.
+What is the most performant way to store this dataframe?
+
+A. Split the data into train and test set, create a unique identifier for each document, then save to a Delta table
+B. Flatten the dataframe to one chunk per row, create a unique identifier for each row, and save to a Delta table
+C. First create a unique identifier for each document, then save to a Delta table
+D. Store each chunk as an independent JSON file in Unity Catalog Volume. For each JSON file, the key is the document section name and the value is the array of text chunks for that section
+
+ans:- b 
+
+A Generative AI Engineer has created a RAG application which can help employees retrieve answers from an internal knowledge base, such as Confluence pages or Google Drive. The prototype application is now working with some positive feedback from internal company testers. Now the Generative Al Engineer wants to formally evaluate the system’s performance and understand where to focus their efforts to further improve the system.
+How should the Generative AI Engineer evaluate the system?
+
+A. Use cosine similarity score to comprehensively evaluate the quality of the final generated answers.
+B. Curate a dataset that can test the retrieval and generation components of the system separately. Use MLflow’s built in evaluation metrics to perform the evaluation on the retrieval and generation components.
+C. Benchmark multiple LLMs with the same data and pick the best LLM for the job.
+D. Use an LLM-as-a-judge to evaluate the quality of the final answers generated.
+
+
+ans ;- b 
+
+A Generative Al Engineer has already trained an LLM on Databricks and it is now ready to be deployed.
+Which of the following steps correctly outlines the easiest process for deploying a model on Databricks?
+
+A. Log the model as a pickle object, upload the object to Unity Catalog Volume, register it to Unity Catalog using MLflow, and start a serving endpoint
+B. Log the model using MLflow during training, directly register the model to Unity Catalog using the MLflow API, and start a serving endpoint
+C. Save the model along with its dependencies in a local directory, build the Docker image, and run the Docker container
+D. Wrap the LLM’s prediction function into a Flask application and serve using Gunicorn
+
+ans:- b 
+
+
+A Generative AI Engineer developed an LLM application using the provisioned throughput Foundation Model API. Now that the application is ready to be deployed, they realize their volume of requests are not sufficiently high enough to create their own provisioned throughput endpoint. They want to choose a strategy that ensures the best cost-effectiveness for their application.
+What strategy should the Generative AI Engineer use?
+
+A. Switch to using External Models instead
+B. Deploy the model using pay-per-token throughput as it comes with cost guarantees
+C. Change to a model with a fewer number of parameters in order to reduce hardware constraint issues
+D. Throttle the incoming batch of requests manually to avoid rate limiting issues
+
+ans :- b 
+
+A Generative AI Engineer is building an LLM to generate article summaries in the form of a type of poem, such as a haiku, given the article content. However, the initial output from the LLM does not match the desired tone or style.
+Which approach will NOT improve the LLM’s response to achieve the desired response?
+
+A. Provide the LLM with a prompt that explicitly instructs it to generate text in the desired tone and style
+B. Use a neutralizer to normalize the tone and style of the underlying documents
+C. Include few-shot examples in the prompt to the LLM
+D. Fine-tune the LLM on a dataset of desired tone and style
+
+ans:-  B
+
+A Generative AI Engineer is creating an LLM-powered application that will need access to up-to-date news articles and stock prices.
+The design requires the use of stock prices which are stored in Delta tables and finding the latest relevant news articles by searching the internet.
+How should the Generative AI Engineer architect their LLM system?
+
+A. Use an LLM to summarize the latest news articles and lookup stock tickers from the summaries to find stock prices.
+B. Query the Delta table for volatile stock prices and use an LLM to generate a search query to investigate potential causes of the stock volatility.
+C. Download and store news articles and stock price information in a vector store. Use a RAG architecture to retrieve and generate at runtime.
+D. Create an agent with tools for SQL querying of Delta tables and web searching, provide retrieved values to an LLM for generation of response.
+
+ans:- D
+
+A Generative AI Engineer is designing a chatbot for a gaming company that aims to engage users on its platform while its users play online video games.
+Which metric would help them increase user engagement and retention for their platform?
+
+A. Randomness
+B. Diversity of responses
+C. Lack of relevance
+D. Repetition of responses
+
+ans:- b 
+
+ company has a typical RAG-enabled, customer-facing chatbot on its website.
+image9
+Select the correct sequence of components a user's questions will go through before the final output is returned. Use the diagram above for reference.
+
+A. 1.embedding model, 2.vector search, 3.context-augmented prompt, 4.response-generating LLM
+B. 1.context-augmented prompt, 2.vector search, 3.embedding model, 4.response-generating LLM
+C. 1.response-generating LLM, 2.vector search, 3.context-augmented prompt, 4.embedding model
+D. 1.response-generating LLM, 2.context-augmented prompt, 3.vector search, 4.embedding model
+
+aans:- a 
+
+
+A team wants to serve a code generation model as an assistant for their software developers. It should support multiple programming languages. Quality is the primary objective.
+Which of the Databricks Foundation Model APIs, or models available in the Marketplace, would be the best fit?
+
+A. Llama2-70b
+B. BGE-large
+C. MPT-7b
+D. CodeLlama-34B
+
+ans:- d 
+
+A Generative AI Engineer is building a RAG application that will rely on context retrieved from source documents that are currently in PDF format. These PDFs can contain both text and images. They want to develop a solution using the least amount of lines of code.
+Which Python package should be used to extract the text from the source documents?
+
+A. flask
+B. beautifulsoup
+C. unstructured
+D. numpy
+
+ans;- c 
+
+A Generative AI Engineer received the following business requirements for an external chatbot.
+The chatbot needs to know what types of questions the user asks and routes to appropriate models to answer the questions. For example, the user might ask about upcoming event details. Another user might ask about purchasing tickets for a particular event.
+What is an ideal workflow for such a chatbot?
+
+A. The chatbot should only look at previous event information
+B. There should be two different chatbots handling different types of user queries.
+C. The chatbot should be implemented as a multi-step LLM workflow. First, identify the type of question asked, then route the question to the appropriate model. If it’s an upcoming event question, send the query to a text-to-SQL model. If it’s about ticket purchasing, the customer should be redirected to a payment platform.
+D. The chatbot should only process payments
+
+ans:- c 
+
+A Generative Al Engineer is tasked with developing an application that is based on an open source large language model (LLM). They need a foundation LLM with a large context window.
+Which model fits this need?
+
+A. DistilBERT
+B. MPT-30B
+C. Llama2-70B
+D. DBRX
+
+ans:- d 
+
+A Generative AI Engineer is building an LLM-based application that has an important transcription (speech-to-text) task. Speed is essential for the success of the application.
+
+Which open Generative AI models should be used?
+
+A. DBRX
+B. MPT-30B-Instruct
+C. Llama-2-70b-chat-hf
+D. whisper-large-v3 (1.6B) 
+
+ans:- d 
+
+A Generative AI Engineer has a provisioned throughput model serving endpoint as part of a RAG application and would like to monitor the serving endpoint’s incoming requests and outgoing responses.
+
+Which Databricks feature should they use?
+
+A. AutoML
+B. Vector Search
+C. Inference Tables
+D. Feature Serving
+
+ans:- c 
+
+A Generative AI Engineer is deciding between using LSH (Locality Sensitive Hashing) and HNSW (Hierarchical Navigable Small World) for indexing their vector database. Their top priority is semantic accuracy.
+
+Which approach should the Generative AI Engineer use to evaluate these two techniques?
+
+A. Compare the cosine similarities of the embeddings of returned results against those of a representative sample of test inputs
+B. Compare the Bilingual Evaluation Understudy (BLEU) scores of returned results for a representative sample of test inputs
+C. Compare the Recall-Oriented-Understudy for Gisting Evaluation (ROUGE) scores of returned results for a representative sample of test inputs
+D. Compare the Levenshtein distances of returned results against a representative sample of test inputs
+
+ans:- a 
+
+When developing an LLM application, it’s crucial to ensure that the data used for training the model complies with licensing requirements to avoid legal risks.
+
+Which action is most appropriate to avoid legal risks?
+
+A. Only use data explicitly labeled with an open license and ensure the license terms are followed.
+B. Any LLM outputs are reasonable to use because they do not reveal the original sources of data directly.
+C. Reach out to the data curators directly to gain written consent for using their data.
+D. Use any publicly available data as public data does not have legal restrictions.
+
+ans:- a 
+
+A Generative AI Engineer interfaces with an LLM with instruction-following capabilities trained on customer calls inquiring about product availability. The LLM should output “Success” if the product is available or “Fail” if not.
+
+Which prompt allows the engineer to receive call classification labels correctly?
+
+A. You are a helpful assistant that reads customer call transcripts. Walk through the transcript and think step-by-step if the customer’s inquiries are addressed successfully. Answer “Success” if yes; otherwise, answer “Fail”.
+B. You will be given a customer call transcript where the customer asks about product availability. Classify the call as “Success” if the product is available and “Fail” if the product is unavailable.
+C. You will be given a customer call transcript where the customer asks about product availability. The outputs are either “Success” or “Fail”. Format the output in JSON, for example: {"call_id": "123", "label": "Succes"}.
+D. You will be given a customer call transcript. Answer “Success” if the customer call has been resolved successfully. Answer “Fail” if the call is redirected or if the question is not resolved.
+
+ans:- b 
+
+Which TWO chain components are required for building a basic LLM-enabled chat application that includes conversational capabilities, knowledge retrieval, and contextual memory? (Choose two.)
+
+A. Vector Stores
+B. Conversation Buffer Memory
+C. External tools
+D. Chat loaders
+E. React Components
+
+ans:- a,B
+Your organization needs to minimize how much it pays for data traffic from the Google network to the internet. What should your organization do?
+
+A. Choose the Standard network service tier.
+B. Choose the Premium network service tier.
+C. Deploy Cloud VPN.
+D. Deploy Cloud NAT.
+
+ans;- A
+
+
+A Generative AI Engineer is asked to build an LLM application that would excel at code generation. They need to select a model that has been specifically trained to generate code.
+
+Which model would likely produce the best results out of the box?
+
+A. CodeLlama-34b-Instruct-hf
+B. Mixtral-8x7B-v0.1
+C. Llama-2-70b-hf
+D. mpt-7b-8k-instruct
+
+ans:- a 
+
+A Generative AI Engineer needs to design an LLM pipeline to conduct multi-stage reasoning that leverages external tools. To be effective at this, the LLM will need to plan and adapt actions while performing complex reasoning tasks.
+
+Which approach will do this?
+
+A. Train the LLM to generate a single, comprehensive response without interacting with any external tools, relying solely on its pre-trained knowledge.
+B. Use a Chain-of-Thought (CoT) prompting technique to guide the LLM through a series of reasoning steps, then manually input the results from external tools for the final answer.
+C. Implement a framework like ReAct, which allows the LLM to generate reasoning traces and perform task-specific actions that leverage external tools if necessary.
+D. Encourage the LLM to make multiple API calls in sequence without planning or structuring the calls, allowing the LLM to decide when and how to use external tools spontaneously.
+
+ans:-  C
+
+A Generative AI Engineer at an automotive company would like to build a question-answering chatbot for customers to inquire about their vehicles. They have a database containing various documents of different vehicle makes, their hardware parts, and common maintenance information.
+
+Which of the following components will NOT be useful in building such a chatbot?
+
+A. Invite users to submit long, rather than concise, questions
+B. Response-generating LLM
+C. Embedding model
+D. Vector database
+
+ans:- A
+
+A Generative AI Engineer is building an LLM to generate article headlines given the article content. However, the initial output from the LLM does not match the desired tone or style.
+
+Which approach would be most effective for adjusting the LLM’s response to achieve the desired response?
+
+A. Exclude any article headlines that do not match the desired output
+B. Fine-tune the LLM on a dataset of desired tone and style
+C. Provide the LLM with a prompt that explicitly instructs it to generate text in the desired tone and style
+D. All of the above
+
+ans:-  C
+
+A Generative AI Engineer is creating a customer support bot that should respond differently to an end user based on the sentiment in their initial message. For example, if the end user’s message was angry, the bot should try to de-escalate their negative sentiments as it solves the customer query. They want to make sure their approach follows best practices.
+
+Which approach will do this?
+
+A. Use an encoder-only LLM model to both detect sentiment and generate replies based upon the detected sentiment.
+B. Implement a RAG architecture for how to respond to users depending on detected sentiment.
+C. Use linear regression model to classify sentiment and feed the result to a system prompt for the LLM to respond.
+D. Create a chain which first uses an LLM to classify sentiment, then changes system prompt for the customer interaction LLM based upon the initial customer query sentiment.
+
+ans:-  D
+
+A Generative AI Engineer is ready to deploy an LLM application written using Foundation Model APIs. They want to follow security best practices for production scenarios.
+
+Which authentication method should they choose?
+
+A. Use OAuth machine-to-machine authentication
+B. Use an access token belonging to service principals
+C. Use an access token belonging to any workspace user
+D. Use a frequently rotated access token belonging to either a workspace user or a service principal
+
+ans:-  A
+
+Your organization meant to purchase a 3-year Committed Use Discount, but accidentally purchased a 1-year Committed Use Discount instead. What should your organization do?
+
+A. Contact your financial institution.
+B. Contact Trust and Safety.
+C. Contact Cloud Billing Support.
+D. Contact Technical Support.
+
+ans:- c 
+
+Your organization needs to allow a production job to have access to a BigQuery dataset. The production job is running on a Compute Engine instance that is part of an instance group.
+What should be included in the IAM Policy on the BigQuery dataset?
+
+A. The Compute Engine instance group
+B. The project that owns the Compute Engine instance
+C. The Compute Engine service account
+D. The Compute Engine instance
+
+ans;- c 
+
+
+---------------------------
+They need a prompt that will extract and output the required information in JSON with the highest level of output accuracy.
+
+Which prompt will do that?
+
+A. You will receive customer emails and need to extract date, sender email, and order ID. Return the extracted information in a human-readable format.
+B. You will receive customer emails and need to extract date, sender email, and order ID. Return the extracted information in JSON format.
+C. You will receive customer emails and need to extract date, sender email, and order ID. Return the extracted information in JSON format. Here’s an example: {"date":"April 16, 2024", "sender_email":"sarah.lee925@gmail.com", "order_id":"RE987D"}
+D. You will receive customer emails and need to extract date, sender email, and order IYou should return the date, sender email, and order ID information in JSON format.
+
+ans:- C
+
+A Generative AI Engineer has built an LLM-based system that will automatically translate user text between two languages. They now want to benchmark multiple LLM’s on this task and pick the best one. They have an evaluation set with known high quality translation examples. They want to evaluate each LLM using the evaluation set with a performant metric.
+
+Which metric should they choose for this evaluation?
+
+A. BLEU metric
+B. NDCG metric
+C. ROUGE metric
+D. RECALL metric
+
+
+ans:- a 
+
+A Generative AI Engineer is using an LLM to classify species of edible mushrooms based on text descriptions of certain features. The model is returning accurate responses in testing and the Generative AI Engineer is confident they have the correct list of possible labels, but the output frequently contains additional reasoning in the answer when the Generative AI Engineer only wants to return the label with no additional text.
+
+Which action should they take to elicit the desired behavior from this LLM?
+
+A. Use few shot prompting to instruct the model on expected output format
+B. Use zero shot prompting to instruct the model on expected output format
+C. Use zero shot chain-of-thought prompting to prevent a verbose output format
+D. Use a system prompt to instruct the model to be succinct in its answer 
+
+ans:- a 
+
+
+A Generative AI Engineer is working with a retail company that wants to enhance its customer experience by automatically handling common customer inquiries. They are working on an LLM-powered AI solution that should improve response times while maintaining a personalized interaction. They want to define the appropriate input and LLM task to do this.
+
+Which input/output pair will do this?
+
+A. Input: Customer service chat logs; Output: Group the chat logs by users, followed by summarizing each user’s interactions, then respond
+B. Input: Customer service chat logs; Output: Find the answers to similar questions and respond with a summary
+C. Input: Customer reviews; Output: Classify review sentiment
+D. Input: Customer reviews; Output: Group the reviews by users and aggregate per-user average rating, then respond
+
+ans:- A
+
+
+A Generative AI Engineer is developing a RAG application and would like to experiment with different embedding models to improve the application performance.
+
+Which strategy for picking an embedding model should they choose?
+
+A. Pick an embedding model with multilingual support to support potential multilingual user questions
+B. Pick the most recent and most performant open LLM released at the time
+C. Pick an embedding model trained on related domain knowledge
+D. Pick the embedding model ranked highest on the Massive Text Embedding Benchmark (MTEB) leaderboard hosted by HuggingFace
+
+ans;- C
+
+A Generative AI Engineer wants their finetuned LLMs in their prod Databricks workspace available for testing in their dev workspace as well. All of their workspaces are Unity Catalog enabled and they are currently logging their models into the Model Registry in MLflow.
+
+What is the most cost-effective and secure option for the Generative AI Engineer to accomplish their goal?
+
+A. Use an external model registry which can be accessed from all workspaces.
+B. Use MLflow to log the model directly into Unity Catalog, and enable READ access in the dev workspace to the model.
+C. Setup a duplicate training pipeline in dev, so that an identical model is available in dev.
+D. Setup a script to export the model from prod and import it to dev.
+
+ans:- b 
+
+A Generative AI Engineer has just deployed an LLM application at a manufacturing company that assists with answering customer service inquiries. They need to identity the key enterprise metrics to monitor the application in production.
+
+Which is NOT a metric they will implement for their customer service LLM application in production?
+
+A. Massive Multi-task Language Understanding (MMLU) score 
+B. Number of customer inquiries processed per unit of time
+C. Factual accuracy of the response
+D. Time taken for LLM to generate a response
+
+
+ans:- A
+
+Generative AI Engineer is helping a cinema extend its website’s chat bot to be able to respond to questions about specific showtimes for movies currently playing at their local theater. They already have the location of the user provided by location services to their agent, and a Delta table which is continually updated with the latest showtime information by location. They want to implement this new capability in their RAG application.
+
+Which option will do this with the least effort and in the most performant way?
+
+A. Create a Feature Serving Endpoint from a FeatureSpec that references an online store synced from the Delta table. Query the Feature Serving Endpoint as part of the agent logic / tool implementation.
+B. Query the Delta table directly via a SQL query constructed from the user’s input using a text-to-SQL LLM in the agent logic / tool implementation.
+C. Set up a task in Databricks Workflows to write the information in the Delta table periodically to an external database such as MySQL and query the information from there as part of the agent logic / tool implementation.
+D. Write the Delta table contents to a text column, then embed those texts using an embedding model and store these in the vector index. Look up the information based on the embedding as part of the agent logic / tool implementation.
+
+ans:- b 
+
+Generative AI Engineer needs to build an LLM application that can understand medical documents, including recently published ones. They want to select an open model available on HuggingFace’s model hub.
+
+Which step is most appropriate for selecting an LLM?
+
+A. Pick any model in the Mistral family, as Mistral models are good with all types of use cases
+B. Select a model based on the highest number of downloads, as this indicates popularity, reliability, and general suitability
+C. Select a model that is most recently uploaded, as this indicates the model is the newest and highly likely to be the most performant
+D. Check for the model and training data description to identify if the model is trained on any medical data.
+
+ans:- D
+
+Generative AI Engineer is building a RAG application that answers questions about technology-related news articles. The source documents may contain a significant amount of irrelevant content, such as advertisements, sports news, or entertainment news.
+
+Which approach is NOT advisable for building a RAG application focused on answering technology-only questions?
+
+A. Include in the system prompt that the application is not supposed to answer any questions unrelated to technology.
+B. Filter out irrelevant news articles in the retrieval process.
+C. Keep all news articles because the RAG application needs to understand non-technological content to avoid answering questions about them.
+D. Filter out irrelevant news articles in the upstream document database.
+
+
+ans:- c 
+
+A Generative AI Engineer is building a RAG application that will rely on context retrieved from source documents that are currently in HTML format. They want to develop a solution using the least amount of lines of code.
+
+Which Python package should be used to extract the text from the source documents?
+
+A. pytesseract
+B. numpy
+C. pypdf2
+D. beautifulsoup
+
+ans ;- D
+
+A Generative AI Engineer is building a RAG application for answering employee questions on company policies.
+
+What are the steps needed to build this RAG application and deploy it?
+
+A. Ingest documents from a source -> Index the documents and saves to Vector Search -> User submits queries against an LLM -> LLM retrieves relevant documents -> Evaluate model -> LLM generates a response -> Deploy it using Model Serving
+B. User submits queries against an LLM -> Ingest documents from a source -> Index the documents and save to Vector Search -> LLM retrieves relevant documents -> LLM generates a response -> Evaluate model -> Deploy it using Model Serving
+C. Ingest documents from a source -> Index the documents and save to Vector Search -> Evaluate model -> Deploy it using Model Serving -> User submits queries against an LLM -> LLM retrieves relevant documents -> LLM generates a response
+D. Ingest documents from a source -> Index the documents and save to Vector Search -> User submits queries against an LLM -> LLM retrieves relevant documents -> LLM generates a response -> Evaluate model -> Deploy it using Model Serving
+
+ans:- D
+
+A Generative AI Engineer who was prototyping an LLM system accidentally ran thousands of inference queries against a Foundation Model endpoint over the weekend. They want to take action to prevent this from unintentionally happening again in the future.
+
+What action should they take?
+
+A. Use prompt engineering to instruct the LLM endpoints to refuse too many subsequent queries.
+B. Require that all development code which interfaces with a Foundation Model endpoint must be reviewed by a Staff level engineer before execution.
+C. Build a pyfunc model which proxies to the Foundation Model endpoint and add throttling within the pyfune model.
+D. Configure rate limiting on the Foundation Model endpoints.
+
+ans:- d 
+
+
+A Generative AI Engineer is setting up a Databricks Vector Search that will lookup news articles by topic within 10 days of the date specified. An example query might be “Tell me about monster truck news around January 5th 1992”. They want to do this with the least amount of effort.
+
+How can they set up their Vector Search index to support this use case?
+
+A. Create separate indexes by topic and add a classifier model to appropriately pick the best index.
+B. Include metadata columns for article date and topic to support metadata filtering.
+C. Pass the query directly to the vector search index and return the best articles.
+D. Split articles by 10 day blocks and return the block closest to the query.
+
+ans;- b 
+
+A Generative AI Engineer developed an LLM application using the pay-per-token Foundation Model API. Now that the application is ready to be deployed, they would like to ensure the model endpoint can serve high incoming volumes of requests in production.
+
+What should the Generative AI Engineer consider?
+
+A. Switch to using External Models instead
+B. Throttle the incoming batch of requests manually to avoid rate limiting issues
+C. Change to a model with a fewer number of parameters in order to reduce hardware constraint issues
+D. Deploy the model using provisioned throughput as it comes with performance guarantees
+
+ans:- d 
+
+A Generative AI Engineer at a home appliance company has been asked to design an LLM based application that accomplishes the following business objective: answer customer questions on home appliances using the associated instruction manuals.
+
+Which set of high-level tasks should the Generative AI Engineer’s system perform?
+
+A. Split instruction manuals into chunks and embed into a vector store. Use the question to retrieve best matched chunks of manual, and use the LLM to generate a response to the user based upon the manual retrieved.
+B. Create an interaction matrix of historical user questions and appliance instruction manuals. Use ALS to factorize the matrix and create embeddings. Calculate the embeddings of new queries and use them to find the best manual. Use an LLM to generate a response to the question based upon the manual retrieved.
+C. Calculate averaged embeddings for each instruction manual, compare embeddings to user query to find the best manual. Pass the best manual with user query into an LLM with a large context window to generate a response to the employee.
+D. Use an LLM to summarize all of the instruction manuals. Provide summaries of each manual and user query into an LLM with a large context window to generate a response to the user.
+ans- a 
+
+
+
+
