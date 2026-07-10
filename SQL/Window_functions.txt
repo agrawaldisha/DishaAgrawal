@@ -1,0 +1,188 @@
+-- ==============================================================================
+-- SQL WINDOW FUNCTIONS CHEAT SHEET NOTEBOOK
+-- ==============================================================================
+-- This notebook contains setup scripts and practical examples based on the 
+-- cheat sheet data to master analytical window functions.
+-- ==============================================================================
+
+-- ------------------------------------------------------------------------------
+-- STEP 1: DATABASE SETUP & DATA INSERTION
+-- Creating the sample bicycle store tables: [product], [orders], and [order_items]
+-- ------------------------------------------------------------------------------
+
+-- Create product table
+CREATE TABLE product (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    model_year INT,
+    price DECIMAL(10, 2)
+);
+
+-- Create orders table
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    order_date DATE
+);
+
+-- Create order_items table
+CREATE TABLE order_items (
+    order_id INT,
+    product_id INT,
+    discount DECIMAL(4, 2),
+    PRIMARY KEY (order_id, product_id)
+);
+
+-- Insert sample products
+INSERT INTO product (product_id, product_name, model_year, price) VALUES
+(1, 'Trek 820 2016', 2016, 379.00),
+(2, 'Ritchey Timberwolf Frameset 2016', 2016, 2434.00),
+(3, 'Surly Wednesday 2018', 2018, 999.00),
+(4, 'Trek Precaliber 24 2016', 2016, 220.00),
+(5, 'Heller Shagamaw 2018', 2018, 1200.00);
+
+-- Insert sample orders
+INSERT INTO orders (order_id, order_date) VALUES
+(1, '2016-01-05'),
+(2, '2018-01-12');
+
+-- Insert sample order items
+INSERT INTO order_items (order_id, product_id, discount) VALUES
+(1, 1, 0.07),
+(1, 4, 0.20),
+(1, 10, 0.05);
+
+
+-- ==============================================================================
+-- SECTION 1: AGGREGATE VS. WINDOW FUNCTIONS
+-- ==============================================================================
+
+-- A window function performs calculations across a set of rows related to the 
+-- current row. Unlike GROUP BY, it does NOT collapse rows into a single output row.
+
+-- 1.1 The Classic GROUP BY Approach (Collapses rows)
+-- Calculates the average price per model year.
+SELECT 
+    model_year,
+    AVG(price) AS avg_price
+FROM product
+GROUP BY model_year;
+
+-- 1.2 The Window Function Approach using PARTITION BY
+-- Compares each individual product's price with its model year's average price
+-- without losing row-level details.
+SELECT 
+    product_name,
+    model_year,
+    price,
+    AVG(price) OVER(PARTITION BY model_year) AS avg_year_price
+FROM product;
+
+
+-- ==============================================================================
+-- SECTION 2: THE WINDOW FRAME & NAMED WINDOWS
+-- ==============================================================================
+
+-- 2.1 Reusing a Window Configuration (WINDOW Clause)
+-- If using the exact same partition/ordering structure multiple times, 
+-- use a named WINDOW after HAVING and before ORDER BY.
+SELECT 
+    product_name,
+    model_year,
+    price,
+    MIN(price) OVER w AS min_price_in_year,
+    MAX(price) OVER w AS max_price_in_year
+FROM product
+WINDOW w AS (PARTITION BY model_year);
+
+-- 2.2 Window Frame Bounds (Example Concept)
+-- frame definitions use keywords like UNBOUNDED PRECEDING, CURRENT ROW, and ROWS BETWEEN.
+SELECT 
+    product_name,
+    price,
+    -- Running total calculation: Sums all rows from start of partition up to current row
+    SUM(price) OVER (
+        ORDER BY price 
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS running_total
+FROM product;
+
+
+-- ==============================================================================
+-- SECTION 3: RANKING FUNCTIONS
+-- ==============================================================================
+
+-- [Concept Summary]:
+-- Ranking functions require an ORDER BY sub-clause inside OVER() to systematically
+-- assign sequential numbers or calculations to rows.
+
+SELECT 
+    product_name,
+    model_year,
+    price,
+    -- ROW_NUMBER: Unique sequential rank per partition (no ties)
+    ROW_NUMBER() OVER (PARTITION BY model_year ORDER BY price ASC) AS row_num,
+    
+    -- RANK: Assigns ranks, skipping numbers if there are ties
+    RANK() OVER (PARTITION BY model_year ORDER BY price ASC) AS rnk,
+    
+    -- DENSE_RANK: Assigns ranks without skipping any numbers on ties
+    DENSE_RANK() OVER (PARTITION BY model_year ORDER BY price ASC) AS dense_rnk,
+    
+    -- NTILE: Splits rows inside the partition into 'N' equal buckets (e.g., 2 buckets)
+    NTILE(2) OVER (PARTITION BY model_year ORDER BY price ASC) AS bucket_id
+FROM product;
+
+
+-- ==============================================================================
+-- SECTION 4: VALUE WINDOW FUNCTIONS (LEAD, LAG, FIRST_VALUE, LAST_VALUE)
+-- ==============================================================================
+
+-- 4.1 LEAD & LAG Functions
+-- Used to pull values from a preceding (LAG) or succeeding (LEAD) row relative to current.
+-- Arguments: (expression, offset [defaults to 1], default_value_if_null [defaults to NULL])
+SELECT 
+    model_year,
+    price,
+    -- Fetches the price from the previous row within the same year partition
+    LAG(price, 1, 0.00) OVER (PARTITION BY model_year ORDER BY price) AS previous_row_price,
+    
+    -- Fetches the price from the next row within the same year partition
+    LEAD(price, 1, NULL) OVER (PARTITION BY model_year ORDER BY price) AS next_row_price
+FROM product;
+
+-- 4.2 FIRST_VALUE & LAST_VALUE
+-- Finds the absolute extremes within an ordered set of window boundaries.
+SELECT 
+    product_name,
+    model_year,
+    price,
+    -- Finds the absolute cheapest product in that model year
+    FIRST_VALUE(price) OVER (
+        PARTITION BY model_year 
+        ORDER BY price ASC
+    ) AS cheapest_in_year,
+    
+    -- Finds the most expensive product in that model year
+    -- Note: We adjust the frame using 'ROWS BETWEEN...' to ensure it looks through the entire partition
+    LAST_VALUE(price) OVER (
+        PARTITION BY model_year 
+        ORDER BY price ASC
+        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+    ) AS most_expensive_in_year
+FROM product;
+
+
+-- ==============================================================================
+-- SECTION 5: AGGREGATE WINDOW FUNCTIONS ON ORDER ITEMS
+-- ==============================================================================
+
+-- Finding the average, maximum, and minimum discount details per product item
+SELECT 
+    order_id,
+    product_id,
+    discount,
+    COUNT(discount) OVER(PARTITION BY product_id) AS total_orders_for_product,
+    AVG(discount) OVER(PARTITION BY product_id) AS avg_discount_for_product,
+    MAX(discount) OVER(PARTITION BY product_id) AS max_discount_for_product,
+    MIN(discount) OVER(PARTITION BY product_id) AS min_discount_for_product
+FROM order_items;

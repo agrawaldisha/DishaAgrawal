@@ -1,0 +1,11 @@
+event_id,user_id,session_id,event_type,product_id,device_type,traffic_source,event_timestamp,amount
+1,U001,S001,page_view,P001,mobile,organic,2026-06-01 10:00:00,0
+2,U001,S001,add_to_cart,P001,mobile,organic,2026-06-01 10:05:00,1500
+3,U001,S001,purchase,P001,mobile,organic,2026-06-01 10:10:00,1500
+4,U002,S002,page_view,P002,desktop,paid,2026-06-01 11:00:00,0
+5,U002,S002,add_to_cart,P002,desktop,paid,2026-06-01 11:05:00,2500
+6,U003,S003,page_view,P003,mobile,social,2026-06-01 12:00:00,0
+7,U003,S003,add_to_cart,P003,mobile,social,2026-06-01 12:05:00,800
+8,U004,S004,page_view,P001,tablet,organic,2026-06-01 13:00:00,0
+9,U004,S004,add_to_cart,P001,tablet,organic,2026-06-01 13:05:00,1500
+10,U004,S004,purchase,P001,tablet,organic,2026-06-01 13:10:00,1500
