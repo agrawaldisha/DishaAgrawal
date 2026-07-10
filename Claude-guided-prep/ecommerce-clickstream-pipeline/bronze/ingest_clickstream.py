@@ -31,6 +31,11 @@ print("Raw DataFrame read successfully.")
 
 # Add metadata columns 
 
+spark.conf.set(
+    "spark.sql.sources.partitionOverwriteMode", 
+    "dynamic"
+)
+
 df_bronze =df_raw \
     .withColumn("ingestion_date", F.lit(ingestion_date)) \
     .withColumn("ingestion_timestamp",F.current_timestamp()) \
