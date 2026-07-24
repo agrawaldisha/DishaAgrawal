@@ -14,11 +14,17 @@ I'm a firm believer that the best way to develop expertise is to build, break, a
 
 ## Repository Structure
 
+### `EcommerceClickStreamPipeline/`
+An end-to-end clickstream data pipeline for an e-commerce use case — bronze/silver/gold medallion layers, Airflow orchestration, and a Terraform-provisioned GCS ingestion setup.
+
 ### `DataBricks/`
-Distributed computing, Delta Lake architecture, and large-scale data pipeline design using Apache Spark on Databricks. Includes notebook experiments, optimization patterns, and workflow orchestration examples.
+Distributed computing, Delta Lake architecture, and large-scale data pipeline design using Apache Spark on Databricks. Includes Spark notebook experiments (`ApacheSparkNotebooks/`), optimization patterns, and workflow orchestration examples.
 
 ### `GenAI/`
 Generative AI explorations — prompt engineering, retrieval-augmented generation (RAG), LLM application development, and agent frameworks. This folder is growing fast.
+
+### `Google Cloud/`
+Certification prep notes and practice questions — Professional Data Engineer, Data Practitioner, and GenAI Leader.
 
 ### `SQL/`
 Advanced SQL patterns: window functions, query optimization, analytical modeling, and complex data transformations across relational systems.
