@@ -23,6 +23,11 @@ Distributed computing, Delta Lake architecture, and large-scale data pipeline de
 ### `GenAI/`
 Generative AI explorations — prompt engineering, retrieval-augmented generation (RAG), LLM application development, and agent frameworks. This folder is growing fast.
 
+### `Claude/`
+Building with Claude — the Messages API (streaming, tool use, multi-turn),
+project-level Claude Code configuration with hooks and custom skills, MCP
+servers, and subagent orchestration. Consolidated from a separate repo.
+
 ### `Google Cloud/`
 Certification prep notes and practice questions — Professional Data Engineer, Data Practitioner, and GenAI Leader.
 
