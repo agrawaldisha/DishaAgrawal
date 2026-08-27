@@ -1,0 +1,747 @@
+================================================================
+  STEP-BY-STEP GUIDE: BUILD A CUSTOM MCP SERVER FOR YOUR APP
+                  (Using All MCP Primitives)
+================================================================
+
+What is a Custom MCP Server?
+-----------------------------
+An MCP (Model Context Protocol) server is a program you write once
+and run locally or remotely, allowing Claude and other AI clients to
+connect to your application's data and functionality. Instead of
+building custom integrations for every AI tool, you expose your app's
+capabilities through MCP's four standardised primitives:
+
+  PRIMITIVE    WHO CONTROLS IT    WHAT IT DOES
+  ---------    ---------------    ----------------------------------------
+  Tools        The LLM (model)    Execute actions with side effects
+                                  (POST-like: create, update, send, query)
+  Resources    The host app       Provide read-only data as context
+                                  (GET-like: config files, logs, schemas)
+  Prompts      The human user     Reusable workflow templates and
+                                  slash commands that users trigger
+  Sampling     The server         Ask Claude to generate text on behalf
+                                  of the server (server calls back to LLM)
+
+This guide walks you through building a complete MCP server for a
+fictional "TaskFlow" application (adapt it to your own app).
+
+================================================================
+ PREREQUISITES
+================================================================
+
+Before you begin, make sure you have:
+
+  1. Python 3.11 or 3.12 installed
+     → Verify: python --version
+
+  2. uv package manager (recommended) OR pip
+     → Install uv (macOS/Linux):
+         curl -LsSf https://astral.sh/uv/install.sh | sh
+     → Install uv (Windows):
+         powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+  3. Claude Desktop App OR Claude Code installed
+     → Claude Desktop: https://claude.ai/download
+     → Claude Code: npm install -g @anthropic-ai/claude-code
+
+  4. MCP Inspector (for testing, optional but recommended)
+     → npm install -g @modelcontextprotocol/inspector
+
+================================================================
+ PART 1: PROJECT SETUP
+================================================================
+
+Step 1 - Create a project directory
+  → Run:
+
+      mkdir taskflow-mcp-server
+      cd taskflow-mcp-server
+
+Step 2 - Initialize the project with uv
+  → Run:
+
+      uv init
+      uv venv
+      source .venv/bin/activate       # macOS/Linux
+      .venv\Scripts\activate          # Windows
+
+Step 3 - Install the MCP Python SDK (FastMCP)
+  → Run:
+
+      uv add mcp
+
+  OR if using pip:
+
+      pip install mcp
+
+Step 4 - Create the main server file
+  → Create a file named: server.py
+
+Step 5 - Create a .env file for configuration
+  → Create a file named .env with:
+
+      APP_NAME=TaskFlow
+      APP_VERSION=1.0.0
+      DATABASE_URL=sqlite:///taskflow.db
+      API_SECRET=your-secret-key-here
+
+  → Add .env to .gitignore:
+
+      echo ".env" >> .gitignore
+
+Step 6 - Create your project structure
+  → Your project should look like this:
+
+      taskflow-mcp-server/
+      ├── server.py           ← Main MCP server (all primitives here)
+      ├── data/
+      │   ├── tasks.json      ← Sample app data
+      │   └── config.json     ← App configuration
+      ├── .env                ← Environment variables (not in git)
+      ├── .gitignore
+      └── pyproject.toml
+
+================================================================
+ PART 2: SERVER BOOTSTRAP & INITIALIZATION
+================================================================
+
+Step 7 - Write the server bootstrap in server.py
+  → Open server.py and add the following:
+
+  ─────────────────────────────────────────────────────────
+  from mcp.server.fastmcp import FastMCP, Context
+  from mcp.server.session import ServerSession
+  from mcp.types import SamplingMessage, TextContent
+  import json, os
+  from datetime import datetime
+
+  # Initialize the MCP server with your app name
+  mcp = FastMCP(
+      name="TaskFlow MCP Server",
+      instructions="""
+          You are connected to TaskFlow, a task management application.
+          You can create, update, and query tasks through Tools,
+          access app data through Resources, use predefined workflow
+          Prompts, and leverage AI analysis through Sampling.
+      """
+  )
+
+  # ── In-memory mock database (replace with your real DB) ──
+  TASKS_DB = {
+      "T001": {"title": "Fix login bug",      "status": "open",
+               "priority": "high",  "assignee": "alice"},
+      "T002": {"title": "Write API docs",     "status": "in_progress",
+               "priority": "medium","assignee": "bob"},
+      "T003": {"title": "Deploy to staging",  "status": "done",
+               "priority": "high",  "assignee": "alice"},
+  }
+  CONFIG = {
+      "app_name": "TaskFlow",
+      "version":  "1.0.0",
+      "max_tasks_per_user": 50,
+      "allowed_statuses": ["open", "in_progress", "review", "done"]
+  }
+  ─────────────────────────────────────────────────────────
+
+================================================================
+ PART 3: PRIMITIVE 1 — TOOLS (Model-Controlled Actions)
+================================================================
+
+  WHAT:  Functions the LLM invokes to perform actions in your app.
+         Like POST endpoints — they create, update, or compute.
+  WHEN:  The LLM decides which tool to call based on user intent.
+  RULE:  Use tools for actions with side effects. Keep each tool
+         focused on one clear responsibility.
+
+Step 8 - Define Tools in server.py
+  → Add the following after your bootstrap code:
+
+  ─────────────────────────────────────────────────────────
+  # ═══════════════════════════════
+  #  PRIMITIVE 1: TOOLS
+  # ═══════════════════════════════
+
+  @mcp.tool()
+  def get_task(task_id: str) -> dict:
+      """Retrieve a single task by its ID from TaskFlow."""
+      task = TASKS_DB.get(task_id)
+      if not task:
+          return {"error": f"Task {task_id} not found"}
+      return {"task_id": task_id, **task}
+
+
+  @mcp.tool()
+  def list_tasks(
+      status: str = None,
+      assignee: str = None,
+      priority: str = None
+  ) -> list:
+      """List tasks from TaskFlow with optional filters.
+
+      Args:
+          status:   Filter by status (open, in_progress, review, done)
+          assignee: Filter by assigned user
+          priority: Filter by priority (low, medium, high)
+      """
+      results = []
+      for tid, task in TASKS_DB.items():
+          if status   and task["status"]   != status:   continue
+          if assignee and task["assignee"] != assignee: continue
+          if priority and task["priority"] != priority: continue
+          results.append({"task_id": tid, **task})
+      return results
+
+
+  @mcp.tool()
+  def create_task(
+      title:    str,
+      priority: str = "medium",
+      assignee: str = None
+  ) -> dict:
+      """Create a new task in TaskFlow.
+
+      Args:
+          title:    Short description of the task (required)
+          priority: low | medium | high (default: medium)
+          assignee: Username to assign the task to
+      """
+      task_id = f"T{str(len(TASKS_DB) + 1).zfill(3)}"
+      TASKS_DB[task_id] = {
+          "title":    title,
+          "status":   "open",
+          "priority": priority,
+          "assignee": assignee or "unassigned",
+          "created":  datetime.now().isoformat()
+      }
+      return {"success": True, "task_id": task_id, **TASKS_DB[task_id]}
+
+
+  @mcp.tool()
+  def update_task_status(task_id: str, new_status: str) -> dict:
+      """Update the status of an existing task.
+
+      Args:
+          task_id:    The ID of the task to update (e.g., T001)
+          new_status: New status: open | in_progress | review | done
+      """
+      allowed = CONFIG["allowed_statuses"]
+      if new_status not in allowed:
+          return {"error": f"Invalid status. Choose from: {allowed}"}
+      if task_id not in TASKS_DB:
+          return {"error": f"Task {task_id} not found"}
+      TASKS_DB[task_id]["status"] = new_status
+      return {"success": True, "task_id": task_id,
+              "new_status": new_status}
+
+
+  @mcp.tool()
+  def delete_task(task_id: str) -> dict:
+      """Permanently delete a task from TaskFlow.
+
+      Args:
+          task_id: The ID of the task to delete (e.g., T001)
+      """
+      if task_id not in TASKS_DB:
+          return {"error": f"Task {task_id} not found"}
+      deleted = TASKS_DB.pop(task_id)
+      return {"success": True, "deleted_task": deleted}
+  ─────────────────────────────────────────────────────────
+
+================================================================
+ PART 4: PRIMITIVE 2 — RESOURCES (Application-Controlled Data)
+================================================================
+
+  WHAT:  Read-only data your app exposes for Claude to use as context.
+         Like GET endpoints — they return files, configs, schemas.
+  WHEN:  The host application decides when to inject resources.
+         Claude can also explicitly ask for them using @ mentions.
+  RULE:  Use resources for data that doesn't change with each request.
+         Never put executable logic here — that belongs in tools.
+
+Step 9 - Define Resources in server.py
+  → Add the following:
+
+  ─────────────────────────────────────────────────────────
+  # ═══════════════════════════════
+  #  PRIMITIVE 2: RESOURCES
+  # ═══════════════════════════════
+
+  @mcp.resource("taskflow://config")
+  def get_app_config() -> str:
+      """Application configuration and allowed settings for TaskFlow.
+      Use this to understand valid statuses, limits, and app metadata."""
+      return json.dumps(CONFIG, indent=2)
+
+
+  @mcp.resource("taskflow://tasks/all")
+  def get_all_tasks_resource() -> str:
+      """Read-only snapshot of all tasks currently in TaskFlow.
+      Use this for reporting or understanding the full task board."""
+      return json.dumps(TASKS_DB, indent=2)
+
+
+  @mcp.resource("taskflow://tasks/{task_id}")
+  def get_task_resource(task_id: str) -> str:
+      """Read-only view of a specific task by ID.
+      Use this when you need context about a single task."""
+      task = TASKS_DB.get(task_id, {})
+      if not task:
+          return json.dumps({"error": f"Task {task_id} not found"})
+      return json.dumps({"task_id": task_id, **task}, indent=2)
+
+
+  @mcp.resource("taskflow://stats")
+  def get_task_stats() -> str:
+      """Live statistics about the current state of the TaskFlow board.
+      Includes counts by status, priority, and assignee."""
+      stats = {"total": len(TASKS_DB), "by_status": {},
+               "by_priority": {}, "by_assignee": {}}
+      for task in TASKS_DB.values():
+          s = task["status"];   stats["by_status"][s]   = stats["by_status"].get(s, 0) + 1
+          p = task["priority"]; stats["by_priority"][p] = stats["by_priority"].get(p, 0) + 1
+          a = task["assignee"]; stats["by_assignee"][a] = stats["by_assignee"].get(a, 0) + 1
+      return json.dumps(stats, indent=2)
+
+
+  @mcp.resource("taskflow://schema")
+  def get_data_schema() -> str:
+      """JSON schema describing the TaskFlow data model.
+      Use this to understand field names, types, and valid values."""
+      return json.dumps({
+          "task": {
+              "task_id":  "string (e.g., T001)",
+              "title":    "string",
+              "status":   "open | in_progress | review | done",
+              "priority": "low | medium | high",
+              "assignee": "string (username)",
+              "created":  "ISO 8601 datetime string"
+          }
+      }, indent=2)
+  ─────────────────────────────────────────────────────────
+
+================================================================
+ PART 5: PRIMITIVE 3 — PROMPTS (User-Controlled Workflows)
+================================================================
+
+  WHAT:  Reusable, parameterized workflow templates that appear as
+         slash commands in Claude Desktop (e.g., /daily-standup).
+  WHEN:  The human user explicitly triggers them.
+  RULE:  Use prompts for known, repeatable workflows. The prompt
+         handles the structure; Claude handles the language output.
+         This is more reliable than asking the LLM to orchestrate
+         multi-step workflows from scratch every time.
+
+Step 10 - Define Prompts in server.py
+  → Add the following:
+
+  ─────────────────────────────────────────────────────────
+  # ═══════════════════════════════
+  #  PRIMITIVE 3: PROMPTS
+  # ═══════════════════════════════
+
+  @mcp.prompt()
+  def daily_standup(assignee: str) -> str:
+      """Generate a daily standup report for a team member.
+
+      Args:
+          assignee: The username to generate the standup for
+      """
+      tasks = [t for t in TASKS_DB.values()
+               if t["assignee"] == assignee]
+      in_progress = [t for t in tasks if t["status"] == "in_progress"]
+      open_tasks  = [t for t in tasks if t["status"] == "open"]
+      done_tasks  = [t for t in tasks if t["status"] == "done"]
+
+      return f"""
+You are generating a daily standup report for {assignee} in TaskFlow.
+
+Here is their current task data:
+  - In Progress ({len(in_progress)} tasks): {json.dumps(in_progress)}
+  - Open / Not Started ({len(open_tasks)} tasks): {json.dumps(open_tasks)}
+  - Completed ({len(done_tasks)} tasks): {json.dumps(done_tasks)}
+
+Please write a concise standup report in this format:
+  YESTERDAY: What was completed
+  TODAY:     What is being worked on
+  BLOCKERS:  Any blockers or risks
+
+Keep it brief — 3 to 5 bullet points per section maximum.
+"""
+
+
+  @mcp.prompt()
+  def triage_high_priority() -> str:
+      """Triage all open high-priority tasks and recommend next actions."""
+      high_priority = [
+          {"id": tid, **task}
+          for tid, task in TASKS_DB.items()
+          if task["priority"] == "high" and task["status"] != "done"
+      ]
+      return f"""
+You are triaging high-priority open tasks in TaskFlow.
+
+Here are all unresolved high-priority tasks:
+{json.dumps(high_priority, indent=2)}
+
+Please:
+1. Rank these tasks by urgency (most critical first)
+2. Identify any that appear blocked or at risk
+3. Suggest who should own each task if unassigned
+4. Recommend immediate next actions for the top 3
+
+Be specific and actionable.
+"""
+
+
+  @mcp.prompt()
+  def write_task_description(feature_name: str, context: str = "") -> str:
+      """Generate a well-structured task description for a new feature.
+
+      Args:
+          feature_name: Name of the feature or bug to describe
+          context:      Additional context or requirements (optional)
+      """
+      return f"""
+You are a senior product manager writing a task description for TaskFlow.
+
+Feature/Issue: {feature_name}
+Additional context: {context if context else "None provided"}
+
+Write a complete task entry in this format:
+
+TITLE:       (concise, action-oriented, under 60 characters)
+DESCRIPTION: (2-3 sentences explaining what and why)
+ACCEPTANCE CRITERIA:
+  - (measurable, testable criterion 1)
+  - (measurable, testable criterion 2)
+  - (measurable, testable criterion 3)
+DEFINITION OF DONE:
+  - Tests written and passing
+  - Code reviewed and approved
+  - Documentation updated
+ESTIMATED EFFORT: (Small / Medium / Large)
+PRIORITY RECOMMENDATION: (low / medium / high) and why
+"""
+  ─────────────────────────────────────────────────────────
+
+================================================================
+ PART 6: PRIMITIVE 4 — SAMPLING (Server Calls Back to the LLM)
+================================================================
+
+  WHAT:  The server asks Claude to generate text during a tool call.
+         Instead of your server needing its own LLM or API key,
+         it delegates inference back to the connected AI client.
+  WHEN:  When a tool needs AI-generated output as part of its work,
+         such as analysis, summarization, or classification.
+  RULE:  The host (Claude) controls whether sampling is allowed.
+         Use it for steps that genuinely need language intelligence;
+         keep deterministic steps in regular tool code.
+
+Step 11 - Define a Sampling-enabled Tool in server.py
+  → Add the following:
+
+  ─────────────────────────────────────────────────────────
+  # ═══════════════════════════════
+  #  PRIMITIVE 4: SAMPLING
+  # ═══════════════════════════════
+
+  @mcp.tool()
+  async def ai_task_summary(
+      assignee: str,
+      ctx: Context[ServerSession, None]
+  ) -> str:
+      """Generate an AI-powered summary of all tasks for a given user.
+      Uses sampling to ask Claude for an intelligent analysis.
+
+      Args:
+          assignee: The username whose tasks to summarize
+      """
+      # Step 1 (server-side, deterministic): collect the data
+      user_tasks = [
+          {"id": tid, **task}
+          for tid, task in TASKS_DB.items()
+          if task["assignee"] == assignee
+      ]
+
+      if not user_tasks:
+          return f"No tasks found for assignee: {assignee}"
+
+      task_data = json.dumps(user_tasks, indent=2)
+
+      # Step 2 (sampling): ask Claude to analyze the data
+      prompt = f"""
+Here are the current tasks assigned to {assignee}:
+{task_data}
+
+Please provide:
+1. A one-paragraph summary of their workload
+2. The most pressing item they should focus on today
+3. Any risk or bottleneck you notice in their queue
+Keep the response concise (under 150 words).
+"""
+
+      result = await ctx.session.create_message(
+          messages=[
+              SamplingMessage(
+                  role="user",
+                  content=TextContent(type="text", text=prompt)
+              )
+          ],
+          max_tokens=300,
+      )
+
+      if result.content.type == "text":
+          return f"AI Summary for {assignee}:\n\n{result.content.text}"
+      return str(result.content)
+  ─────────────────────────────────────────────────────────
+
+================================================================
+ PART 7: RUN THE SERVER
+================================================================
+
+Step 12 - Add the server entry point at the bottom of server.py
+  → Append the following:
+
+  ─────────────────────────────────────────────────────────
+  if __name__ == "__main__":
+      # stdio   — for Claude Desktop / Claude Code (local)
+      # streamable-http — for remote / production deployments
+      mcp.run(transport="stdio")
+  ─────────────────────────────────────────────────────────
+
+Step 13 - Test the server with MCP Inspector
+  → Run:
+
+      npx @modelcontextprotocol/inspector uv run server.py
+
+  → Open the Inspector UI in your browser (default: http://localhost:5173)
+  → The Inspector shows:
+      - History tab:  Every JSON-RPC message (for debugging)
+      - Sampling tab: Simulates a model calling back to the server
+      - Notifications panel: Progress updates and logs
+  → Try listing tools, calling a tool, reading a resource,
+    and triggering a prompt to verify all primitives work.
+
+Step 14 - Verify the server runs standalone
+  → Run directly:
+
+      uv run server.py
+
+  → The server should start without errors.
+  → Press Ctrl+C to stop it.
+
+================================================================
+ PART 8: CONNECT TO CLAUDE DESKTOP
+================================================================
+
+Step 15 - Find the Claude Desktop config file
+  → macOS:   ~/Library/Application Support/Claude/claude_desktop_config.json
+  → Windows: %APPDATA%\Claude\claude_desktop_config.json
+  → Linux:   ~/.config/Claude/claude_desktop_config.json
+
+Step 16 - Add your custom server to the config
+  → Open the config file and add:
+
+  {
+    "mcpServers": {
+      "taskflow": {
+        "command": "uv",
+        "args": [
+          "run",
+          "--directory",
+          "/absolute/path/to/taskflow-mcp-server",
+          "server.py"
+        ]
+      }
+    }
+  }
+
+  Replace /absolute/path/to/taskflow-mcp-server with your actual path.
+
+  If you used pip instead of uv:
+
+  {
+    "mcpServers": {
+      "taskflow": {
+        "command": "python",
+        "args": ["/absolute/path/to/taskflow-mcp-server/server.py"]
+      }
+    }
+  }
+
+Step 17 - Restart Claude Desktop
+  → Fully quit Claude Desktop (not just close the window).
+  → Reopen Claude Desktop.
+  → Look for the hammer (tools) icon in the input bar.
+  → This confirms TaskFlow MCP server is connected.
+
+Step 18 - Verify all primitives in Claude Desktop
+  → Tools:     "List all open tasks in TaskFlow"
+               "Create a task: Fix the payment gateway bug"
+               "Update T001 status to in_progress"
+  → Resources: Type @ in the input to see available resources
+               Select "taskflow://stats" to load live stats
+               Select "taskflow://config" to load app config
+  → Prompts:   Type / in the input to see slash commands
+               /daily-standup → enter a username
+               /triage-high-priority → auto-runs the workflow
+               /write-task-description → enter a feature name
+  → Sampling:  "Give me an AI summary of Alice's tasks"
+               (Claude will call ai_task_summary, which calls
+                back to Claude via sampling to generate the answer)
+
+================================================================
+ PART 9: CONNECT TO CLAUDE CODE (Terminal)
+================================================================
+
+Step 19 - Add the server to Claude Code
+  → Run from your project directory:
+
+      claude mcp add taskflow -- uv run server.py
+
+  → Verify:
+
+      claude mcp list
+
+  → Start Claude Code and test:
+
+      claude
+      > "Show me all high-priority tasks"
+      > "Create a task titled 'Optimize database queries'"
+
+Step 20 - Alternative: Use .mcp.json in your project root
+  → Create .mcp.json:
+
+  {
+    "mcpServers": {
+      "taskflow": {
+        "command": "uv",
+        "args": ["run", "server.py"]
+      }
+    }
+  }
+
+  → Prompt Claude Code:
+      "Use this mcp.json to configure the TaskFlow connection"
+
+  → Verify config stored in .Claude/settings.json
+
+================================================================
+ PART 10: PRODUCTION CONSIDERATIONS
+================================================================
+
+Step 21 - Switch to Streamable HTTP transport for remote deployment
+  → Change your server entry point:
+
+      mcp.run(transport="streamable-http", host="0.0.0.0", port=8000)
+
+  → Claude Code remote config:
+
+      claude mcp add-json taskflow \
+        '{"type":"http","url":"https://your-domain.com/mcp"}'
+
+Step 22 - Add authentication (recommended for production)
+  → Pass secrets via environment variables, NOT hardcoded values:
+
+  {
+    "mcpServers": {
+      "taskflow": {
+        "command": "uv",
+        "args": ["run", "server.py"],
+        "env": {
+          "DATABASE_URL":  "your-real-db-url",
+          "API_SECRET":    "your-secret-key"
+        }
+      }
+    }
+  }
+
+Step 23 - Limit context window usage
+  → Install only the MCP servers you actively use.
+  → Every server adds its tool schemas to Claude's context window.
+  → Too many active servers visibly degrades Claude's tool selection.
+
+================================================================
+ PART 11: TROUBLESHOOTING
+================================================================
+
+  PROBLEM: Server shows "disconnected" in claude mcp list
+  SOLUTION: Run `uv run server.py` directly in your terminal.
+            Read the stderr output — it shows the actual error.
+            Common causes: wrong Python version, missing dependency,
+            or import error in server.py.
+
+  PROBLEM: Tools appear but resources and prompts do not
+  SOLUTION: Confirm you have @mcp.resource() and @mcp.prompt()
+            decorators defined and the file is saved.
+            Restart Claude Desktop after any server code change.
+
+  PROBLEM: Sampling returns an error
+  SOLUTION: The host (Claude Desktop) must have sampling enabled.
+            Check Claude Desktop settings → Developer → MCP options.
+            Some client versions restrict sampling by default.
+
+  PROBLEM: JSON config error silently breaks all servers
+  SOLUTION: Validate your JSON at https://jsonlint.com
+            A single missing comma disables all MCP servers.
+
+  PROBLEM: "uv: command not found" in Claude Desktop
+  SOLUTION: Use the full absolute path to uv:
+              which uv  →  /Users/yourname/.cargo/bin/uv
+            Put that full path in "command" in the config JSON.
+
+  PROBLEM: Prompts do not appear as slash commands
+  SOLUTION: Slash commands appear in Claude Desktop only.
+            In Claude Code, reference prompts explicitly:
+              "Run the daily-standup prompt for alice"
+
+================================================================
+ COMPLETE server.py FILE STRUCTURE SUMMARY
+================================================================
+
+  server.py
+  ─────────────────────────────────────────
+  [1] Imports and FastMCP initialization
+  [2] In-memory database (replace with your real DB/ORM)
+  [3] TOOLS      → get_task, list_tasks, create_task,
+                   update_task_status, delete_task
+  [4] RESOURCES  → config, all tasks, single task by ID,
+                   live stats, data schema
+  [5] PROMPTS    → daily_standup, triage_high_priority,
+                   write_task_description
+  [6] SAMPLING   → ai_task_summary (calls back to Claude)
+  [7] Entry point → mcp.run(transport="stdio")
+
+================================================================
+ USEFUL LINKS
+================================================================
+
+  MCP Python SDK (FastMCP):
+    https://github.com/modelcontextprotocol/python-sdk
+
+  MCP Python SDK on PyPI:
+    https://pypi.org/project/mcp/
+
+  Official MCP Specification:
+    https://modelcontextprotocol.io/specification/2025-11-25
+
+  MCP Inspector (debugging tool):
+    https://github.com/modelcontextprotocol/inspector
+
+  MCP Server Registry (2,300+ community servers):
+    https://github.com/modelcontextprotocol/servers
+
+  Claude Desktop Download:
+    https://claude.ai/download
+
+  Claude Code Docs:
+    https://docs.claude.com/en/docs/claude-code/overview
+
+  Anthropic MCP Introduction Course (free):
+    https://anthropic.skilljar.com/introduction-to-model-context-protocol
+
+================================================================
+ SETUP TIME:  ~30–45 minutes
+ DIFFICULTY:  Intermediate (requires Python knowledge)
+ SDK VERSION: MCP spec 2025-11-25  |  Python SDK 1.x
+================================================================
