@@ -1,0 +1,181 @@
+month,store,category,revenue,expense
+2026-01,Downtown,Rent,41811.89,6978.25
+2026-01,Downtown,Wages,41811.89,15402.92
+2026-01,Downtown,Coffee Beans & Supplies,41811.89,9804.25
+2026-01,Downtown,Utilities,41811.89,2166.09
+2026-01,Downtown,Marketing,41811.89,1900.03
+2026-01,Downtown,Equipment,41811.89,2109.3
+2026-01,Uptown,Rent,29731.99,5345.46
+2026-01,Uptown,Wages,29731.99,9784.81
+2026-01,Uptown,Coffee Beans & Supplies,29731.99,6943.69
+2026-01,Uptown,Utilities,29731.99,1881.05
+2026-01,Uptown,Marketing,29731.99,1493.47
+2026-01,Uptown,Equipment,29731.99,1603.9
+2026-01,Airport,Rent,55278.87,9351.69
+2026-01,Airport,Wages,55278.87,19847.02
+2026-01,Airport,Coffee Beans & Supplies,55278.87,11345.06
+2026-01,Airport,Utilities,55278.87,3520.68
+2026-01,Airport,Marketing,55278.87,2754.28
+2026-01,Airport,Equipment,55278.87,2728.18
+2026-01,Mall Kiosk,Rent,16878.68,3298.16
+2026-01,Mall Kiosk,Wages,16878.68,5843.64
+2026-01,Mall Kiosk,Coffee Beans & Supplies,16878.68,3601.97
+2026-01,Mall Kiosk,Utilities,16878.68,987.76
+2026-01,Mall Kiosk,Marketing,16878.68,875.38
+2026-01,Mall Kiosk,Equipment,16878.68,865.52
+2026-01,University,Rent,26048.29,4830.09
+2026-01,University,Wages,26048.29,10483.66
+2026-01,University,Coffee Beans & Supplies,26048.29,5567.59
+2026-01,University,Utilities,26048.29,1506.86
+2026-01,University,Marketing,26048.29,1228.22
+2026-01,University,Equipment,26048.29,1358.57
+2026-02,Downtown,Rent,41818.82,7467.35
+2026-02,Downtown,Wages,41818.82,13775.8
+2026-02,Downtown,Coffee Beans & Supplies,41818.82,8669.17
+2026-02,Downtown,Utilities,41818.82,2623.4
+2026-02,Downtown,Marketing,41818.82,2199.73
+2026-02,Downtown,Equipment,41818.82,2170.44
+2026-02,Uptown,Rent,27753.77,5076.86
+2026-02,Uptown,Wages,27753.77,9793.16
+2026-02,Uptown,Coffee Beans & Supplies,27753.77,6199.3
+2026-02,Uptown,Utilities,27753.77,1766.81
+2026-02,Uptown,Marketing,27753.77,1409.41
+2026-02,Uptown,Equipment,27753.77,1453.64
+2026-02,Airport,Rent,51496.5,9456.97
+2026-02,Airport,Wages,51496.5,18820.25
+2026-02,Airport,Coffee Beans & Supplies,51496.5,10173.64
+2026-02,Airport,Utilities,51496.5,3020.65
+2026-02,Airport,Marketing,51496.5,2490.05
+2026-02,Airport,Equipment,51496.5,2459.68
+2026-02,Mall Kiosk,Rent,16508.24,3282.44
+2026-02,Mall Kiosk,Wages,16508.24,5427.7
+2026-02,Mall Kiosk,Coffee Beans & Supplies,16508.24,3877.98
+2026-02,Mall Kiosk,Utilities,16508.24,873.81
+2026-02,Mall Kiosk,Marketing,16508.24,806.06
+2026-02,Mall Kiosk,Equipment,16508.24,834.82
+2026-02,University,Rent,25098.29,4742.61
+2026-02,University,Wages,25098.29,9272.24
+2026-02,University,Coffee Beans & Supplies,25098.29,5386.84
+2026-02,University,Utilities,25098.29,1457.16
+2026-02,University,Marketing,25098.29,1330.28
+2026-02,University,Equipment,25098.29,1238.11
+2026-03,Downtown,Rent,37165.79,6159.14
+2026-03,Downtown,Wages,37165.79,12170.81
+2026-03,Downtown,Coffee Beans & Supplies,37165.79,8461.03
+2026-03,Downtown,Utilities,37165.79,2252.18
+2026-03,Downtown,Marketing,37165.79,1948.11
+2026-03,Downtown,Equipment,37165.79,1802.71
+2026-03,Uptown,Rent,29988.16,5634.25
+2026-03,Uptown,Wages,29988.16,10268.58
+2026-03,Uptown,Coffee Beans & Supplies,29988.16,6808.34
+2026-03,Uptown,Utilities,29988.16,1715.92
+2026-03,Uptown,Marketing,29988.16,1461.3
+2026-03,Uptown,Equipment,29988.16,1459.34
+2026-03,Airport,Rent,48921.98,9106.13
+2026-03,Airport,Wages,48921.98,16560.07
+2026-03,Airport,Coffee Beans & Supplies,48921.98,10772.25
+2026-03,Airport,Utilities,48921.98,3034.1
+2026-03,Airport,Marketing,48921.98,2522.56
+2026-03,Airport,Equipment,48921.98,2560.03
+2026-03,Mall Kiosk,Rent,17146.49,2994.92
+2026-03,Mall Kiosk,Wages,17146.49,5967.78
+2026-03,Mall Kiosk,Coffee Beans & Supplies,17146.49,3326.68
+2026-03,Mall Kiosk,Utilities,17146.49,924.58
+2026-03,Mall Kiosk,Marketing,17146.49,777.95
+2026-03,Mall Kiosk,Equipment,17146.49,797.48
+2026-03,University,Rent,25511.98,4301.09
+2026-03,University,Wages,25511.98,8692.82
+2026-03,University,Coffee Beans & Supplies,25511.98,6123.08
+2026-03,University,Utilities,25511.98,1492.55
+2026-03,University,Marketing,25511.98,1341.45
+2026-03,University,Equipment,25511.98,1192.23
+2026-04,Downtown,Rent,43209.13,7260.42
+2026-04,Downtown,Wages,43209.13,14764.29
+2026-04,Downtown,Coffee Beans & Supplies,43209.13,10065.17
+2026-04,Downtown,Utilities,43209.13,2279.08
+2026-04,Downtown,Marketing,43209.13,2226.16
+2026-04,Downtown,Equipment,43209.13,2196.41
+2026-04,Uptown,Rent,31139.35,5037.71
+2026-04,Uptown,Wages,31139.35,10953.8
+2026-04,Uptown,Coffee Beans & Supplies,31139.35,6596.74
+2026-04,Uptown,Utilities,31139.35,1898.79
+2026-04,Uptown,Marketing,31139.35,1559.35
+2026-04,Uptown,Equipment,31139.35,1731.54
+2026-04,Airport,Rent,56466.8,9435.82
+2026-04,Airport,Wages,56466.8,20011.4
+2026-04,Airport,Coffee Beans & Supplies,56466.8,12614.0
+2026-04,Airport,Utilities,56466.8,3710.35
+2026-04,Airport,Marketing,56466.8,2988.39
+2026-04,Airport,Equipment,56466.8,2893.87
+2026-04,Mall Kiosk,Rent,20395.46,3365.69
+2026-04,Mall Kiosk,Wages,20395.46,6818.73
+2026-04,Mall Kiosk,Coffee Beans & Supplies,20395.46,4195.97
+2026-04,Mall Kiosk,Utilities,20395.46,1190.34
+2026-04,Mall Kiosk,Marketing,20395.46,921.5
+2026-04,Mall Kiosk,Equipment,20395.46,1065.11
+2026-04,University,Rent,26721.24,4314.62
+2026-04,University,Wages,26721.24,8687.56
+2026-04,University,Coffee Beans & Supplies,26721.24,6007.69
+2026-04,University,Utilities,26721.24,1697.34
+2026-04,University,Marketing,26721.24,1522.8
+2026-04,University,Equipment,26721.24,1608.58
+2026-05,Downtown,Rent,48022.54,8045.3
+2026-05,Downtown,Wages,48022.54,14299.43
+2026-05,Downtown,Coffee Beans & Supplies,48022.54,10762.94
+2026-05,Downtown,Utilities,48022.54,2717.39
+2026-05,Downtown,Marketing,48022.54,2331.31
+2026-05,Downtown,Equipment,48022.54,2298.25
+2026-05,Uptown,Rent,34293.1,6633.36
+2026-05,Uptown,Wages,34293.1,12134.53
+2026-05,Uptown,Coffee Beans & Supplies,34293.1,7460.7
+2026-05,Uptown,Utilities,34293.1,1908.42
+2026-05,Uptown,Marketing,34293.1,1513.65
+2026-05,Uptown,Equipment,34293.1,1656.29
+2026-05,Airport,Rent,61162.94,12371.79
+2026-05,Airport,Wages,61162.94,21602.24
+2026-05,Airport,Coffee Beans & Supplies,61162.94,19415.02
+2026-05,Airport,Utilities,61162.94,3541.52
+2026-05,Airport,Marketing,61162.94,2804.49
+2026-05,Airport,Equipment,61162.94,2851.54
+2026-05,Mall Kiosk,Rent,19207.93,3972.56
+2026-05,Mall Kiosk,Wages,19207.93,6336.24
+2026-05,Mall Kiosk,Coffee Beans & Supplies,19207.93,4473.77
+2026-05,Mall Kiosk,Utilities,19207.93,1079.63
+2026-05,Mall Kiosk,Marketing,19207.93,1023.02
+2026-05,Mall Kiosk,Equipment,19207.93,986.28
+2026-05,University,Rent,28734.38,5157.43
+2026-05,University,Wages,28734.38,9596.07
+2026-05,University,Coffee Beans & Supplies,28734.38,6518.95
+2026-05,University,Utilities,28734.38,1669.15
+2026-05,University,Marketing,28734.38,1313.46
+2026-05,University,Equipment,28734.38,1308.2
+2026-06,Downtown,Rent,47556.12,9506.3
+2026-06,Downtown,Wages,47556.12,16831.05
+2026-06,Downtown,Coffee Beans & Supplies,47556.12,10375.46
+2026-06,Downtown,Utilities,47556.12,2910.46
+2026-06,Downtown,Marketing,47556.12,2595.19
+2026-06,Downtown,Equipment,47556.12,2414.32
+2026-06,Uptown,Rent,33884.62,6571.56
+2026-06,Uptown,Wages,33884.62,12215.56
+2026-06,Uptown,Coffee Beans & Supplies,33884.62,8256.01
+2026-06,Uptown,Utilities,33884.62,2059.15
+2026-06,Uptown,Marketing,33884.62,1549.01
+2026-06,Uptown,Equipment,33884.62,1531.97
+2026-06,Airport,Rent,67743.15,13665.03
+2026-06,Airport,Wages,67743.15,23412.15
+2026-06,Airport,Coffee Beans & Supplies,67743.15,14503.73
+2026-06,Airport,Utilities,67743.15,4480.4
+2026-06,Airport,Marketing,67743.15,3124.68
+2026-06,Airport,Equipment,67743.15,3175.02
+2026-06,Mall Kiosk,Rent,20950.95,3667.0
+2026-06,Mall Kiosk,Wages,20950.95,7330.2
+2026-06,Mall Kiosk,Coffee Beans & Supplies,20950.95,4556.48
+2026-06,Mall Kiosk,Utilities,20950.95,1286.76
+2026-06,Mall Kiosk,Marketing,20950.95,1150.76
+2026-06,Mall Kiosk,Equipment,20950.95,1054.19
+2026-06,University,Rent,30263.55,4665.67
+2026-06,University,Wages,30263.55,10556.12
+2026-06,University,Coffee Beans & Supplies,30263.55,6264.99
+2026-06,University,Utilities,30263.55,1660.89
+2026-06,University,Marketing,30263.55,1420.16
+2026-06,University,Equipment,30263.55,1477.79

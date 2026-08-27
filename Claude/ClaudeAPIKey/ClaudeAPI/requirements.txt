@@ -1,0 +1,6 @@
+streamlit>=1.38
+anthropic[vertex]>=0.40
+google-cloud-aiplatform>=1.70
+pandas>=2.2
+numpy>=1.26
+plotly>=5.24
