@@ -19,7 +19,8 @@ system prompts, streaming, and tool use, with a Streamlit app
 ### `ClaudeCode/`
 A demo project showing project-level Claude Code configuration — hooks
 that block edits to sensitive files, log edits, and summarize a session,
-plus a custom `summarize-txt` skill and a `CLAUDE.md`.
+plus a custom `summarize-txt` skill and a `CLAUDE.md`. Alongside it,
+`Claude-Code-Complete-Guide.pdf` — a 289-page reference.
 
 ### `ClaudeMCPServer/`
 Model Context Protocol notes and a step-by-step guide to building the
