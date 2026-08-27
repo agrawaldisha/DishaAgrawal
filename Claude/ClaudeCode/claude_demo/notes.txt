@@ -1,0 +1,10 @@
+Meeting notes - Q3 planning
+- Follow up with design team about new onboarding flow
+- Check budget numbers before Friday review
+- Idea: add dark mode toggle to settings page
+- Reminder: renew domain by end of month
+- Grocery list: coffee, eggs, bread, oat milk
+- Book recommendation from Sam: "The Pragmatic Programmer"
+- Random fact: octopuses have three hearts
+- TODO: raise a PR
+- Call plumber about kitchen sink
