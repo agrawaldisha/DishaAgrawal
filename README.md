@@ -30,12 +30,12 @@ A working repository, not a portfolio. It holds two kinds of things: pipelines a
 An end-to-end clickstream pipeline built on the medallion architecture.
 
 - **Bronze** — `ingest_clickstream.py` lands raw events as date-partitioned Parquet
-- **Silver** — `transform_clickstream.py` cleans, types, and deduplicates
+- **Silver** — `transform_clickstream.py` cleans, types, and deduplicates, routing rows that fail a business rule to a quarantine layer with their rejection reason
 - **Gold** — `build_gold.py` produces four analytical tables: user behaviour, product performance, traffic source, and cart abandonment
 - **Orchestration** — an Airflow DAG (`dags/clickstream_pipeline_dag.py`) chains the three layers on a 2 AM daily schedule with retries and failure alerts
 - **Infrastructure** — Terraform provisions the GCS data lake with lifecycle rules for tiering old partitions to cheaper storage
 
-Runs locally against `local[*]` Spark with the sample data in `data/`.
+Runs locally against `local[*]` Spark with the sample data in `data/`. See the [folder README](EcommerceClickStreamPipeline/readme.md) for the full walkthrough.
 
 ### `python/` — PaySync
 
