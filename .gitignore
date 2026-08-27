@@ -15,3 +15,8 @@ __pycache__/
 
 # Downloaded build dependencies
 EcommerceClickStreamPipeline/terraform/jars/
+
+# Spark layer outputs — regenerated on every pipeline run
+EcommerceClickStreamPipeline/**/output/
+EcommerceClickStreamPipeline/**/quarantine/
+*.crc
