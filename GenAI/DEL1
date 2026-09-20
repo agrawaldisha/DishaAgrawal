@@ -1,0 +1,1021 @@
+DATA ENGINEERING CURRICULUM - FULL MCQ QUESTION BANK (Q1-Q80)
+Category column follows the Topic Area names from the TOC grid.
+====================================================================================================
+
+Q1
+Category: DE Fundamentals & Core Data Structures
+Difficulty: Easy
+Type: SCQ
+Question: A retail chain with 400 stores lands raw point-of-sale files in cloud object storage every night. The data engineering team then runs a job that standardises currency codes, removes duplicate transactions, and maps legacy store codes to the enterprise store master before analysts can query the data. Which stage of the data engineering lifecycle does this job represent?
+Option A: Transform stage
+Option B: Ingestion stage
+Option C: Serving stage
+Option D: Generation stage
+----------------------------------------------------------------------------------------------------
+
+Q2
+Category: DE Fundamentals & Core Data Structures
+Difficulty: Easy
+Type: SCQ
+Question: A healthcare analytics company has a contractual SLA to deliver refreshed patient-encounter data to its warehouse by 6:00 AM daily. One team member builds executive dashboards, another trains hospital readmission models, and another maintains the ingestion jobs, handles upstream schema changes, and is paged when the load fails. Which role is primarily accountable for meeting the 6:00 AM data delivery SLA?
+Option A: Data Analyst
+Option B: Data Engineer
+Option C: Data Scientist
+Option D: BI Developer
+----------------------------------------------------------------------------------------------------
+
+Q3
+Category: DE Fundamentals & Core Data Structures
+Difficulty: Easy
+Type: SCQ
+Question: A Python ingestion job processes 2 million event records per run. For every record it must check whether that event_id has already been processed in the current run and skip it if so. The check happens once per record and the order of processed IDs does not matter. Which built-in data structure should hold the processed event_ids to keep this check fast?
+Option A: list
+Option B: tuple
+Option C: set
+Option D: deque
+----------------------------------------------------------------------------------------------------
+
+Q4
+Category: DE Fundamentals & Core Data Structures
+Difficulty: Medium
+Type: MCQ
+Question: An order-enrichment step in a Python pipeline attaches product details to 5 million order records (n) using a reference list of 50,000 products (m). The current code loops over every order and, for each one, scans the full product list to find the matching product_id. The run now takes several hours. Which statements about this step are correct? (Select all that apply)
+Option A: The nested-loop lookup runs in O(n × m) time, where n is orders and m is products.
+Option B: Replacing the product list with a dict makes each lookup O(log m), as keys stay sorted.
+Option C: A dict keyed on product_id cuts total work to about O(n + m) with O(m) extra memory.
+Option D: Sorting the orders list first lets the nested loop finish in O(n) with no extra memory.
+----------------------------------------------------------------------------------------------------
+
+Q5
+Category: DE Fundamentals & Core Data Structures
+Difficulty: Medium
+Type: SCQ
+Question: A daily pipeline appends the previous day's sales rows into a warehouse table partitioned by sale_date using plain INSERT statements. When the job fails midway, the on-call engineer reruns it for the same date. Finance has now found inflated revenue on several dates because some rows were loaded twice. Which design change makes reruns of this pipeline safe?
+Option A: Increase the retry count on the scheduler so fewer manual reruns are required.
+Option B: Add a DISTINCT in the downstream reporting views to hide the duplicate rows.
+Option C: Run the job only once per day and disable all reruns after a failure occurs.
+Option D: Overwrite the target date partition on each run so that reruns are idempotent.
+----------------------------------------------------------------------------------------------------
+
+Q6
+Category: DE Fundamentals & Core Data Structures
+Difficulty: Medium
+Type: SCQ
+Question: A media company's Python job reads 10 million clickstream events and must produce a count of events per page_url. There are about 20,000 distinct URLs, and the result feeds an hourly content-performance report. Which approach produces the counts most efficiently in a single pass?
+Option A: A dict mapping page_url to a running count, updated once per event read.
+Option B: A list of (url, count) tuples, scanned to find and update each url's entry.
+Option C: A sorted list of urls, re-sorted each time a newly seen url is appended.
+Option D: A set of urls, with counts derived at the end by recounting the raw events.
+----------------------------------------------------------------------------------------------------
+
+Q7
+Category: DE Fundamentals & Core Data Structures
+Difficulty: Hard
+Type: SCQ
+Question: A Python job on a worker with 16 GB of RAM must read a 60 GB application log file and output the number of ERROR lines per service. There are roughly 300 services. The first version used f.readlines() and was killed by the out-of-memory (OOM) killer. Moving to a larger VM is not approved. Which approach solves the problem with the lowest memory footprint while keeping a single pass over the file?
+Option A: Keep readlines() but call gc.collect() after every one million lines parsed.
+Option B: Iterate the file object line by line and count errors in a dict by service.
+Option C: Read the whole file into one string with read() and split it on newline chars.
+Option D: Store all lines in a set first so duplicate log lines consume no extra memory.
+----------------------------------------------------------------------------------------------------
+
+Q8
+Category: DE Fundamentals & Core Data Structures
+Difficulty: Hard
+Type: SCQ
+Question: An upstream application team renamed the column cust_id to customer_id in their export without notice. The nightly pipeline did not fail; it loaded NULL into the warehouse customer key for three days, and the finance team presented incorrect revenue-by-customer figures to leadership. Which control, added to the pipeline, most directly prevents a recurrence of this incident?
+Option A: Increase warehouse compute so the nightly job completes much earlier.
+Option B: Ask analysts to manually review finance dashboards every morning.
+Option C: Add ingestion schema checks that fail the run on a contract breach.
+Option D: Move the pipeline schedule from nightly runs to hourly runs instead.
+----------------------------------------------------------------------------------------------------
+
+Q9
+Category: Data Warehouse & Data Lake Concepts
+Difficulty: Easy
+Type: SCQ
+Question: A bank runs its core banking platform on a transactional database that handles thousands of concurrent deposits and transfers per second. The risk department separately needs a system to analyse five years of transaction history for quarterly trend and exposure reports. Which characteristic best describes the workload of the risk department's analytical (OLAP) system?
+Option A: Highly normalised schema tuned for frequent single-row writes.
+Option B: Short transactions that need strict row-level locking for concurrency.
+Option C: Queries fetching one customer record by primary key in milliseconds.
+Option D: Read-heavy queries that scan and aggregate large volumes of history.
+----------------------------------------------------------------------------------------------------
+
+Q10
+Category: Data Warehouse & Data Lake Concepts
+Difficulty: Easy
+Type: SCQ
+Question: A retail data warehouse has a central table fact_sales containing quantity_sold, net_amount, and foreign keys date_key, store_key, and product_key. The product table referenced by product_key holds descriptive attributes such as product_name, category, and brand, used to filter and group sales in reports. In this star schema, what type of table is the product table?
+Option A: Fact table
+Option B: Aggregate fact table
+Option C: Dimension table
+Option D: Staging table
+----------------------------------------------------------------------------------------------------
+
+Q11
+Category: Data Warehouse & Data Lake Concepts
+Difficulty: Easy
+Type: MCQ
+Question: A media company organises its data lake into raw, staging, and curated zones. New joiners are reviewing the documentation to understand what data belongs in each zone. Which statements about these zones are correct? (Select all that apply)
+Option A: The raw zone holds data that is cleansed and deduplicated before it lands.
+Option B: The raw zone keeps source data unchanged so pipelines can be replayed.
+Option C: The curated zone holds unvalidated copies taken straight from sources.
+Option D: The curated zone holds conformed, business-ready data for reporting use.
+----------------------------------------------------------------------------------------------------
+
+Q12
+Category: Data Warehouse & Data Lake Concepts
+Difficulty: Medium
+Type: SCQ
+Question: A telecom operator stores petabytes of call detail records, JSON device telemetry, and images in low-cost cloud object storage. Regulators require row-level deletes for customer erasure requests with transactional guarantees, and the BI team wants to run SQL directly on the same data without copying it into a separate system. Which architecture best fits these requirements?
+Option A: A lakehouse using an open table format such as Delta Lake or Iceberg.
+Option B: A traditional data lake of raw Parquet files with no table format layer.
+Option C: An enterprise warehouse with all raw files bulk-loaded into its tables.
+Option D: An OLTP database cluster replicated across regions for read scaling.
+----------------------------------------------------------------------------------------------------
+
+Q13
+Category: Data Warehouse & Data Lake Concepts
+Difficulty: Medium
+Type: SCQ
+Question: In a sales warehouse, the product dimension originally stored category and subcategory names on every product row. To remove repeated text, the team split it into product, subcategory, and category tables linked by keys. After deployment, the most used BI dashboards need additional joins and show slower load times. Which statement accurately describes the trade-off introduced?
+Option A: Snowflaking removed redundancy and also reduced the joins per query.
+Option B: Snowflaking reduced redundant storage but added joins that slow BI.
+Option C: Snowflaking turned the dimension tables into fact tables with measures.
+Option D: Snowflaking denormalised dimensions and so increased stored redundancy.
+----------------------------------------------------------------------------------------------------
+
+Q14
+Category: Data Warehouse & Data Lake Concepts
+Difficulty: Medium
+Type: SCQ
+Question: An e-commerce warehouse stores fact_orders at order level, with one row per order and a total_amount column. The business now asks for revenue by product category, but a single order often contains products from several categories. Analysts currently cannot produce accurate category revenue. Which modelling change resolves this correctly?
+Option A: Add a category column to the order fact holding the first item's category.
+Option B: Divide each order total equally across all categories found in the order.
+Option C: Model the fact at order-line grain with one row for each product ordered.
+Option D: Create a snowflaked category table and join it to the order-level fact.
+----------------------------------------------------------------------------------------------------
+
+Q15
+Category: Data Warehouse & Data Lake Concepts
+Difficulty: Hard
+Type: MCQ
+Question: A logistics company runs month-end analytical reports directly against its production PostgreSQL order-management database. During these reports, order-entry API latency rises from 80 ms to 2 seconds and lock waits increase sharply. The CTO asks for changes that address the root cause rather than the symptoms. Which actions are appropriate? (Select all that apply)
+Option A: Offload analytics to a separate OLAP store fed by CDC or batch extracts.
+Option B: Point reports at a read replica to isolate them from the primary's writes.
+Option C: Add more indexes on OLTP tables to speed up full-history aggregation scans.
+Option D: Raise isolation to SERIALIZABLE so that reports and writes never conflict.
+----------------------------------------------------------------------------------------------------
+
+Q16
+Category: Data Warehouse & Data Lake Concepts
+Difficulty: Hard
+Type: SCQ
+Question: An insurance company's lakehouse keeps source extracts in the raw zone for only 24 hours to save storage cost. The staging zone is overwritten daily, and curated tables are incrementally merged. Fourteen days after deployment, a transformation bug is found that corrupted premium calculations in curated tables. The source system cannot re-export historical data. Which assessment is most accurate?
+Option A: The curated zone needed snowflaking so bad values could be isolated.
+Option B: The staging zone should be dropped so data goes raw to curated directly.
+Option C: Re-running the incremental merge on today's staging data fixes history.
+Option D: Short raw retention broke replayability, so history cannot be rebuilt.
+----------------------------------------------------------------------------------------------------
+
+Q17
+Category: SQL Fundamentals
+Difficulty: Easy
+Type: SCQ
+Question: A sales analyst needs a list of regions whose total 2025 revenue exceeded 1,000,000. The query so far is:
+
+SELECT region, SUM(amount) AS total_revenue
+FROM sales
+WHERE order_year = 2025
+GROUP BY region
+____ ;
+
+Which clause correctly completes the query?
+Option A: HAVING SUM(amount) > 1000000
+Option B: WHERE SUM(amount) > 1000000
+Option C: AND SUM(amount) > 1000000
+Option D: ORDER BY SUM(amount) > 1000000
+----------------------------------------------------------------------------------------------------
+
+Q18
+Category: SQL Fundamentals
+Difficulty: Easy
+Type: SCQ
+Question: A CRM database has a customers table with 10,000 rows and an orders table keyed by customer_id. Marketing wants a report of every customer with their total number of orders, including customers who have never placed an order (shown with a count of 0). Written as FROM customers ... orders, which join should be used?
+Option A: INNER JOIN from customers to orders on customer_id
+Option B: LEFT JOIN from customers to orders on customer_id
+Option C: RIGHT JOIN from customers to orders on customer_id
+Option D: SELF JOIN from customers to customers on customer_id
+----------------------------------------------------------------------------------------------------
+
+Q19
+Category: SQL Fundamentals
+Difficulty: Medium
+Type: MCQ
+Question: An engineer needs each customer's most recent order from orders(order_id, customer_id, order_ts, amount) and writes:
+
+WITH ranked AS (
+  SELECT *, ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_ts DESC) AS rn
+  FROM orders
+)
+SELECT * FROM ranked WHERE rn = 1;
+
+Which statements about this query are correct? (Select all that apply)
+Option A: Replacing ROW_NUMBER with RANK always returns one row per customer.
+Option B: The rn = 1 filter could be moved into the WHERE clause inside the CTE body.
+Option C: It returns exactly one row per customer even if two orders tie on order_ts.
+Option D: Removing PARTITION BY would return only the latest order in the table.
+----------------------------------------------------------------------------------------------------
+
+Q20
+Category: SQL Fundamentals
+Difficulty: Hard
+Type: SCQ
+Question: To find customers who have never ordered, an engineer runs:
+
+SELECT customer_id FROM customers
+WHERE customer_id NOT IN (SELECT customer_id FROM orders);
+
+The query returns zero rows, although a reconciliation shows 1,200 customers have no orders. Investigation reveals that orders.customer_id contains NULLs from guest checkouts. What is the cause, and what is the correct fix?
+Option A: NOT IN needs an index on orders.customer_id; add one and run it again.
+Option B: The subquery returns duplicates that cancel matches; add DISTINCT to it.
+Option C: NOT IN compares data types strictly; cast both columns to VARCHAR first.
+Option D: A NULL in the subquery makes NOT IN unknown; rewrite using NOT EXISTS.
+----------------------------------------------------------------------------------------------------
+
+Q21
+Category: SQL Fundamentals
+Difficulty: Easy
+Type: SCQ
+Question: A subscription analytics team needs the list of subscribers who signed up without a discount code. In the subscriptions table, discount_code is NULL for these subscribers. The query below returns zero rows, although a data profile shows 3,400 rows with a NULL discount_code:
+
+SELECT subscriber_id FROM subscriptions WHERE discount_code = NULL;
+
+Which WHERE condition returns the expected rows?
+Option A: WHERE discount_code = ''
+Option B: WHERE discount_code IS NULL
+Option C: WHERE discount_code == NULL
+Option D: WHERE discount_code IN (NULL)
+----------------------------------------------------------------------------------------------------
+
+Q22
+Category: SQL Fundamentals
+Difficulty: Easy
+Type: SCQ
+Question: A CRM customers table holds 50,000 rows. For 8,000 customers, the email column is NULL because they registered through an in-store kiosk. A data quality dashboard runs:
+
+SELECT COUNT(*), COUNT(email) FROM customers;
+
+Which pair of values does the query return?
+Option A: 50000 and 50000
+Option B: 42000 and 50000
+Option C: 42000 and 42000
+Option D: 50000 and 42000
+----------------------------------------------------------------------------------------------------
+
+Q23
+Category: SQL Fundamentals
+Difficulty: Easy
+Type: SCQ
+Question: An HR system stores employees(emp_id, emp_name, manager_id), where manager_id refers to the emp_id of another row in the same table. The people analytics team needs an org chart report listing each employee's name next to their manager's name. Which join construct produces this report?
+Option A: A self join of employees as e and m on e.manager_id = m.emp_id
+Option B: A cross join of employees with itself filtered on e.emp_id = m.emp_id
+Option C: A left join from employees to a managers table on manager_id
+Option D: A self join of employees as e and m on e.emp_id = m.emp_id
+----------------------------------------------------------------------------------------------------
+
+Q24
+Category: SQL Fundamentals
+Difficulty: Easy
+Type: SCQ
+Question: A pricing analyst runs the following query on PostgreSQL to find high-value order lines:
+
+SELECT order_id, quantity * unit_price AS line_total
+FROM order_lines
+WHERE line_total > 500;
+
+The query fails with the error: column "line_total" does not exist. What is the reason?
+Option A: Aliases can be defined for columns only, not for calculated expressions.
+Option B: The multiplication must be wrapped in SUM() before it can be filtered.
+Option C: WHERE is evaluated before SELECT, so the alias is not yet defined there.
+Option D: Aliases defined using AS are visible only to the GROUP BY clause.
+----------------------------------------------------------------------------------------------------
+
+Q25
+Category: SQL Fundamentals
+Difficulty: Easy
+Type: SCQ
+Question: A sales operations manager requests all orders from the North or South regions where the amount is greater than 1,000. The report built from the query below unexpectedly includes North region orders worth only 200:
+
+SELECT * FROM orders
+WHERE region = 'North' OR region = 'South' AND amount > 1000;
+
+Which WHERE clause returns the intended result?
+Option A: WHERE (region = 'North' OR region = 'South') AND amount > 1000
+Option B: WHERE region = 'North' OR (region = 'South' AND amount > 1000)
+Option C: WHERE region = 'North' AND (region = 'South' OR amount > 1000)
+Option D: WHERE region IN ('North' AND 'South') AND amount > 1000
+----------------------------------------------------------------------------------------------------
+
+Q26
+Category: SQL Fundamentals
+Difficulty: Medium
+Type: SCQ
+Question: In an e-commerce warehouse, orders(order_id, order_date, order_amount) has one row per order, and shipments(shipment_id, order_id) has one row per parcel; large orders often ship in several parcels. The daily revenue query below reports a figure 18% higher than the finance ledger:
+
+SELECT SUM(o.order_amount)
+FROM orders o JOIN shipments s ON o.order_id = s.order_id
+WHERE o.order_date = '2026-01-15';
+
+What is the most likely cause, and what is the fix?
+Option A: The inner join drops unshipped orders; switch it over to a LEFT JOIN.
+Option B: SUM double counts NULL amounts; wrap order_amount in COALESCE.
+Option C: Multi-parcel orders repeat per shipment; aggregate before joining.
+Option D: The date filter runs after SUM; move it into a HAVING clause.
+----------------------------------------------------------------------------------------------------
+
+Q27
+Category: SQL Fundamentals
+Difficulty: Medium
+Type: SCQ
+Question: Marketing needs every customer with their number of orders placed in 2026, including customers with zero orders. The query below omits all customers who have not ordered in 2026:
+
+SELECT c.customer_id, COUNT(o.order_id) AS orders_2026
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id
+WHERE o.order_date >= '2026-01-01'
+GROUP BY c.customer_id;
+
+Which change fixes the query?
+Option A: Replace COUNT(o.order_id) with COUNT(*) so empty groups get counted.
+Option B: Change the LEFT JOIN to a RIGHT JOIN so that all customers are kept.
+Option C: Add HAVING COUNT(o.order_id) >= 0 so zero-order customers are kept.
+Option D: Move the date condition from the WHERE clause into the ON clause.
+----------------------------------------------------------------------------------------------------
+
+Q28
+Category: SQL Fundamentals
+Difficulty: Medium
+Type: SCQ
+Question: A retail finance team uses daily_sales(store_id, sale_date, revenue), with exactly one row per store per day. They need a column showing each store's cumulative revenue from its first sale date up to the current row's date, restarting for every store. Which expression produces this column?
+Option A: SUM(revenue) OVER (ORDER BY store_id, sale_date)
+Option B: SUM(revenue) OVER (PARTITION BY store_id ORDER BY sale_date)
+Option C: SUM(revenue) OVER (PARTITION BY sale_date ORDER BY store_id)
+Option D: SUM(revenue) GROUP BY store_id ORDER BY sale_date
+----------------------------------------------------------------------------------------------------
+
+Q29
+Category: SQL Fundamentals
+Difficulty: Medium
+Type: MCQ
+Question: A product analytics table monthly_revenue(product_id, month_start, revenue) has one row per product per month with no missing months. An engineer adds:
+
+revenue - LAG(revenue) OVER (PARTITION BY product_id ORDER BY month_start) AS mom_change
+
+Which statements about this expression are correct? (Select all that apply)
+Option A: The first month of each product returns NULL for mom_change.
+Option B: LAG here returns the following month's revenue for each row.
+Option C: Dropping PARTITION BY still compares months within each product.
+Option D: LAG(revenue, 12) returns revenue for the same month a year ago.
+----------------------------------------------------------------------------------------------------
+
+Q30
+Category: SQL Fundamentals
+Difficulty: Medium
+Type: MCQ
+Question: A data engineer refactors a 300-line reporting query with deeply nested subqueries into a sequence of CTEs on PostgreSQL. During code review, the team discusses how CTEs behave. Which statements are correct? (Select all that apply)
+Option A: A CTE is stored as a permanent table that other sessions can query.
+Option B: A CTE can be referenced more than once within the query defining it.
+Option C: A recursive CTE can traverse a parent-child hierarchy of any depth.
+Option D: A CTE defined in one statement stays available to the next statement.
+----------------------------------------------------------------------------------------------------
+
+Q31
+Category: SQL Fundamentals
+Difficulty: Medium
+Type: SCQ
+Question: A retail loyalty team wants orders whose amount is higher than that same customer's own average order amount, to target upsell campaigns. The orders table has order_id, customer_id, and amount. Which WHERE clause, applied to FROM orders o, returns the correct rows?
+Option A: WHERE o.amount > (SELECT AVG(i.amount) FROM orders i WHERE i.customer_id = o.customer_id)
+Option B: WHERE o.amount > (SELECT AVG(i.amount) FROM orders i GROUP BY i.customer_id)
+Option C: WHERE o.amount > (SELECT AVG(i.amount) FROM orders i WHERE i.customer_id <> o.customer_id)
+Option D: WHERE o.amount > AVG(o.amount) GROUP BY o.customer_id
+----------------------------------------------------------------------------------------------------
+
+Q32
+Category: SQL Fundamentals
+Difficulty: Medium
+Type: SCQ
+Question: A food delivery platform stores a rating (1 to 5) for each of 10,000 orders in a quarter. 4,000 customers did not rate their order, so rating is NULL for those rows. SELECT AVG(rating) returns 4.2. A product manager claims the unrated orders were counted as zero. Which statement is accurate?
+Option A: AVG counts NULLs as zero, so 4.2 already includes all 10,000 orders.
+Option B: AVG returns NULL whenever any row in the set has a NULL rating.
+Option C: AVG skips NULLs, so 4.2 is the mean of the 6,000 rated orders only.
+Option D: AVG replaces NULLs with the column mean, so 4.2 is an imputed value.
+----------------------------------------------------------------------------------------------------
+
+Q33
+Category: SQL Fundamentals
+Difficulty: Medium
+Type: SCQ
+Question: A payments team reconciles the payment gateway's settlement table with the internal ledger using transaction_id. In one query they must see matched transactions and also transactions that exist in only one of the two tables, whichever side it is. Which approach meets this requirement?
+Option A: INNER JOIN, then filter rows where the amounts differ across tables
+Option B: FULL OUTER JOIN, then check which side's transaction_id is NULL
+Option C: LEFT JOIN from ledger, then keep rows where gateway's id is NULL
+Option D: CROSS JOIN, then keep rows where the two transaction_ids differ
+----------------------------------------------------------------------------------------------------
+
+Q34
+Category: SQL Fundamentals
+Difficulty: Hard
+Type: SCQ
+Question: A compensation review requires, for each department, all employees in the top three distinct salary levels. Ties must all be included and no salary level may be skipped. For a department with salaries 150, 150, 140, 130, 120 (in thousands), the expected output is 150, 150, 140, 130. Which window function, filtered with <= 3, gives this result?
+Option A: ROW_NUMBER() OVER (PARTITION BY dept_id ORDER BY salary DESC)
+Option B: RANK() OVER (PARTITION BY dept_id ORDER BY salary DESC)
+Option C: NTILE(3) OVER (PARTITION BY dept_id ORDER BY salary DESC)
+Option D: DENSE_RANK() OVER (PARTITION BY dept_id ORDER BY salary DESC)
+----------------------------------------------------------------------------------------------------
+
+Q35
+Category: SQL Fundamentals
+Difficulty: Hard
+Type: SCQ
+Question: A bank's ledger table txn(account_id, txn_date, txn_id, amount) often has several transactions per account on the same date. The statement view uses:
+
+SUM(amount) OVER (PARTITION BY account_id ORDER BY txn_date) AS running_balance
+
+Auditors report that all transactions on the same date show an identical running balance equal to the end-of-day total, instead of progressing transaction by transaction. What is the cause and the correct fix?
+Option A: The default frame includes same-date peers; use ROWS and order by txn_id too.
+Option B: SUM ignores row order within partitions; replace it with a scalar subquery.
+Option C: ORDER BY groups rows by date implicitly; add txn_date to the PARTITION BY.
+Option D: Window functions run before WHERE; move all the filter logic to an outer query.
+----------------------------------------------------------------------------------------------------
+
+Q36
+Category: SQL Fundamentals
+Difficulty: Hard
+Type: MCQ
+Question: An IoT platform stores daily_readings(device_id, reading_date, avg_temp). Devices sometimes go offline, so some dates have no row. An engineer publishes a metric labelled "7-day rolling average" using:
+
+AVG(avg_temp) OVER (PARTITION BY device_id ORDER BY reading_date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW)
+
+Which statements about this metric are correct? (Select all that apply)
+Option A: When dates are missing, the window can span more than 7 calendar days.
+Option B: Joining to a calendar table first gives one row per device per day.
+Option C: Switching to RANGE 6 PRECEDING behaves identically on every engine.
+Option D: The ROWS frame inserts NULL rows for all of the dates that have no readings.
+----------------------------------------------------------------------------------------------------
+
+Q37
+Category: Python Scripting
+Difficulty: Easy
+Type: SCQ
+Question: A data engineer writes a helper in an ingestion script:
+
+def add_to_batch(record, batch=[]):
+    batch.append(record)
+    return batch
+
+The script calls add_to_batch(r1) while processing file A and later calls add_to_batch(r2) while processing file B, without passing batch either time. The batch returned for file B unexpectedly contains r1. Why does this happen?
+Option A: append() changes a copy of the list, which Python caches on return.
+Option B: Python keeps local variables alive until the whole script finishes.
+Option C: The default list is created once at definition and shared by calls.
+Option D: return batch promotes the list to a global that later calls can see.
+----------------------------------------------------------------------------------------------------
+
+Q38
+Category: Python Scripting
+Difficulty: Easy
+Type: SCQ
+Question: A nightly Python job processes 5,000 small CSV extracts in a loop using:
+
+f = open(path)
+data = f.read()
+parse(data)
+f.close()
+
+parse() occasionally raises an exception that an outer retry handler catches and logs before moving to the next file. After several hours, the job fails with OSError: Too many open files. Which change fixes the root cause?
+Option A: Call f.flush() after each read so the file handle is released early.
+Option B: Use with open(path) as f: so the file is closed even if parse fails.
+Option C: Wrap only parse() in try/except and continue on with the next file.
+Option D: Open each file in binary mode using "rb" to reduce handle usage.
+----------------------------------------------------------------------------------------------------
+
+Q39
+Category: Python Scripting
+Difficulty: Medium
+Type: SCQ
+Question: An analyst needs to set amount to 0 for all cancelled orders in a Pandas DataFrame df before loading it to the warehouse. The line below raises SettingWithCopyWarning and, on inspection, the amounts in df are unchanged:
+
+df[df["status"] == "cancelled"]["amount"] = 0
+
+Which statement correctly updates df?
+Option A: df[df["status"] == "cancelled"]["amount"].replace(0)
+Option B: df["amount"][df["status"] == "cancelled"].fillna(0)
+Option C: df.query("status == 'cancelled'")["amount"] = 0
+Option D: df.loc[df["status"] == "cancelled", "amount"] = 0
+----------------------------------------------------------------------------------------------------
+
+Q40
+Category: Python Scripting
+Difficulty: Medium
+Type: MCQ
+Question: A Pandas pipeline merges orders_df (1,000,000 rows, one row per order) with customers_df on customer_id using how="left" to attach customer segment. The output unexpectedly has 1,040,000 rows, and downstream revenue totals are inflated. Which statements are correct? (Select all that apply)
+Option A: A left merge can never return more rows than the left DataFrame has.
+Option B: The extra rows come from orders whose customer_id is absent on the right.
+Option C: customers_df likely holds duplicate customer_id values causing fan-out.
+Option D: Passing validate="many_to_one" to merge would raise an error here.
+----------------------------------------------------------------------------------------------------
+
+Q41
+Category: Python Scripting
+Difficulty: Easy
+Type: SCQ
+Question: An ingestion script calls a vendor REST API using the requests library. The response body is a JSON array of orders, available as a string in resp.text. The engineer writes:
+
+orders = json.load(resp.text)
+
+The script fails with AttributeError: 'str' object has no attribute 'read'. Which line correctly converts the response into Python objects?
+Option A: orders = json.dumps(resp.text)
+Option B: orders = json.load(open(resp.text))
+Option C: orders = json.loads(resp.text)
+Option D: orders = json.dump(resp.text)
+----------------------------------------------------------------------------------------------------
+
+Q42
+Category: Python Scripting
+Difficulty: Easy
+Type: SCQ
+Question: A partner feed delivers each transaction as a Python dict. The key "coupon_code" is optional and is missing from some records. The line below raises KeyError and stops the whole batch:
+
+code = record["coupon_code"]
+
+The business rule is to treat a missing coupon code as the string "NONE" and continue processing. Which line implements this rule?
+Option A: code = record.get("coupon_code", "NONE")
+Option B: code = record["coupon_code"] or "NONE"
+Option C: code = record.setdefault("coupon_code", None)
+Option D: code = record.pop("coupon_code", None)
+----------------------------------------------------------------------------------------------------
+
+Q43
+Category: Python Scripting
+Difficulty: Easy
+Type: SCQ
+Question: A finance script reads transactions.csv with csv.DictReader and totals the amount column:
+
+total = 0
+for row in reader:
+    total += row["amount"]
+
+The script fails with TypeError: unsupported operand type(s) for +=: 'int' and 'str'. What is the cause?
+Option A: DictReader skips the header, so amount refers to the wrong column.
+Option B: The amount column holds blanks, which Python reads in as NaN values.
+Option C: The csv module needs an explicit delimiter before it parses numbers.
+Option D: csv returns every field as a string; convert it before adding.
+----------------------------------------------------------------------------------------------------
+
+Q44
+Category: Python Scripting
+Difficulty: Easy
+Type: SCQ
+Question: A procurement team loads vendors.csv into Pandas. Vendor codes such as 00451 and 00987 appear with leading zeros in the source ERP. After pd.read_csv(path), the codes become 451 and 987, and a later merge with the vendor master finds no matches. Which call preserves the codes exactly as they appear in the file?
+Option A: pd.read_csv(path, parse_dates=["vendor_code"])
+Option B: pd.read_csv(path, dtype={"vendor_code": str})
+Option C: pd.read_csv(path, usecols=["vendor_code"])
+Option D: pd.read_csv(path, index_col="vendor_code")
+----------------------------------------------------------------------------------------------------
+
+Q45
+Category: Python Scripting
+Difficulty: Medium
+Type: SCQ
+Question: A pipeline keeps its production settings in a dict:
+
+base_cfg = {"source": "s3", "tables": ["orders", "customers"]}
+
+To build a test configuration, an engineer writes:
+
+test_cfg = base_cfg.copy()
+test_cfg["tables"].append("payments_test")
+
+Later in the same process, the production job reads base_cfg and attempts to load payments_test. What explains this, and what is the fix?
+Option A: dict.copy() is lazy until the first write; call copy() again after edits.
+Option B: copy() is shallow, so the list is shared; use copy.deepcopy() instead.
+Option C: Appending to the list rebinds the dict key; assign a new list instead.
+Option D: Dict keys are shared by all copies; use dict(base_cfg) to separate them.
+----------------------------------------------------------------------------------------------------
+
+Q46
+Category: Python Scripting
+Difficulty: Medium
+Type: MCQ
+Question: A clickstream job defines the reader below and assigns its result:
+
+def read_events(path):
+    with open(path) as f:
+        for line in f:
+            yield json.loads(line)
+
+events = read_events("events.jsonl")
+
+The file is 40 GB. Which statements about events are correct? (Select all that apply)
+Option A: Calling read_events() reads the whole file into memory right away.
+Option B: No line is read from the file until the generator is iterated over.
+Option C: The generator can be looped over twice to reprocess all the events.
+Option D: Memory use stays roughly constant regardless of the file's size.
+----------------------------------------------------------------------------------------------------
+
+Q47
+Category: Python Scripting
+Difficulty: Medium
+Type: SCQ
+Question: An extraction step is written as:
+
+conn = get_connection()
+try:
+    rows = extract(conn)
+except TimeoutError:
+    log("timeout")
+else:
+    load(rows)
+finally:
+    conn.close()
+
+During a run, extract() raises TimeoutError. Which sequence of calls executes?
+Option A: log("timeout"), then load(rows), then conn.close()
+Option B: log("timeout") only; conn.close() is skipped after an error
+Option C: load(rows), then log("timeout"), then conn.close()
+Option D: log("timeout"), then conn.close(); load(rows) does not run
+----------------------------------------------------------------------------------------------------
+
+Q48
+Category: Python Scripting
+Difficulty: Medium
+Type: SCQ
+Question: A sales DataFrame df has columns region, customer_id, and amount, with many orders per customer. The regional dashboard needs, per region, the total amount in a column named total_amount and the number of distinct customers in a column named unique_customers. Which statement produces this?
+Option A: df.groupby("region").agg(total_amount=("amount", "sum"), unique_customers=("customer_id", "nunique"))
+Option B: df.groupby("region").agg(total_amount=("amount", "sum"), unique_customers=("customer_id", "count"))
+Option C: df.groupby("region").agg(total_amount=("amount", "count"), unique_customers=("customer_id", "nunique"))
+Option D: df.groupby("region").agg(total_amount=("amount", "nunique"), unique_customers=("customer_id", "sum"))
+----------------------------------------------------------------------------------------------------
+
+Q49
+Category: Python Scripting
+Difficulty: Medium
+Type: SCQ
+Question: A tax computation step processes a 5-million-row Pandas DataFrame with columns gross and tax. It computes net per row using a for loop over df.iterrows() and writes each result back, and the step now takes about 40 minutes. Which change gives the largest performance improvement?
+Option A: Replace iterrows() with itertuples() inside the same Python loop body.
+Option B: Use df.apply(lambda r: r["gross"] - r["tax"], axis=1) for all rows.
+Option C: Use the vectorised expression df["net"] = df["gross"] - df["tax"].
+Option D: Convert the DataFrame to a list of dicts and loop over it in Python.
+----------------------------------------------------------------------------------------------------
+
+Q50
+Category: Python Scripting
+Difficulty: Medium
+Type: SCQ
+Question: A reconciliation script holds transactions as a list of dicts such as {"txn_date": "2026-03-01", "amount": 250.0}. Dates are ISO-formatted strings. The output must be sorted by txn_date ascending and, for the same date, by amount descending. Which expression produces this order?
+Option A: sorted(txns, key=lambda t: (t["txn_date"], t["amount"]), reverse=True)
+Option B: sorted(txns, key=lambda t: (-t["txn_date"], t["amount"]))
+Option C: sorted(txns, key=lambda t: t["txn_date"]).sort(key=lambda t: -t["amount"])
+Option D: sorted(txns, key=lambda t: (t["txn_date"], -t["amount"]))
+----------------------------------------------------------------------------------------------------
+
+Q51
+Category: Python Scripting
+Difficulty: Hard
+Type: MCQ
+Question: A 25 GB sales CSV must be aggregated into total revenue per region (about 50 regions) on a VM with 32 GB RAM. Loading it with a single pd.read_csv(path) call crashes the process. The engineer switches to:
+
+for chunk in pd.read_csv(path, chunksize=1_000_000):
+    ...
+
+Which statements about this approach are correct? (Select all that apply)
+Option A: Each chunk is a DataFrame, so per-region sums can be combined across chunks.
+Option B: Per-chunk mean revenue can be averaged across all chunks to get the exact mean.
+Option C: Reading only region and revenue through usecols cuts memory use further.
+Option D: chunksize makes Pandas process the chunks in parallel on all CPU cores.
+----------------------------------------------------------------------------------------------------
+
+Q52
+Category: Python Scripting
+Difficulty: Hard
+Type: SCQ
+Question: A billing reconciliation script sums 2 million invoice line amounts such as 19.99, parsed from CSV into Python floats. The monthly total differs from the ERP by 0.03, and a quick check shows 0.1 + 0.2 == 0.3 evaluates to False. Auditors require totals that match the ERP to the paisa. Which approach is appropriate?
+Option A: Parse amounts into decimal.Decimal from their string form before summing.
+Option B: Round the running total to two decimals with round() inside the loop.
+Option C: Convert amounts to numpy float32 so fewer bits carry less rounding error.
+Option D: Use math.fsum on the floats, as it stores all values exactly in base 10.
+----------------------------------------------------------------------------------------------------
+
+Q53
+Category: Basic PySpark
+Difficulty: Easy
+Type: SCQ
+Question: A data engineer runs rows = df.collect() on a 300 GB DataFrame in a Spark cluster with 20 healthy executors. The job fails with java.lang.OutOfMemoryError reported on the driver, while the executor logs show no errors. What explains this failure?
+Option A: collect() writes results to executor disk, exceeding local storage limits.
+Option B: collect() brings all rows to the driver, whose memory cannot hold them.
+Option C: collect() makes each executor hold a full copy of the entire DataFrame.
+Option D: collect() disables partitioning, so one executor must process every row.
+----------------------------------------------------------------------------------------------------
+
+Q54
+Category: Basic PySpark
+Difficulty: Easy
+Type: SCQ
+Question: A notebook cell contains:
+
+df = spark.read.parquet("s3://lake/curated/orders")
+filtered = df.filter(F.col("status") == "DELIVERED")
+selected = filtered.select("order_id", "amount")
+
+The cell finishes in under a second and the Spark UI shows no job scanning the order data. Which next line causes Spark to actually execute the processing?
+Option A: selected = selected.withColumn("amount_usd", F.col("amount") * 0.012)
+Option B: selected = selected.orderBy(F.col("amount").desc())
+Option C: selected.count()
+Option D: selected = selected.groupBy("order_id").agg(F.sum("amount"))
+----------------------------------------------------------------------------------------------------
+
+Q55
+Category: Basic PySpark
+Difficulty: Easy
+Type: SCQ
+Question: A PySpark DataFrame df has numeric columns amount and discount. The reporting layer needs a new column net_amount equal to amount minus discount, with all existing columns retained. Assuming pyspark.sql.functions is imported as F, which statement is correct?
+Option A: df = df.withColumn("net_amount", F.col("amount") - F.col("discount"))
+Option B: df["net_amount"] = df["amount"] - df["discount"]
+Option C: df = df.withColumnRenamed("net_amount", F.col("amount") - F.col("discount"))
+Option D: df.withColumn("net_amount", "amount" - "discount")
+----------------------------------------------------------------------------------------------------
+
+Q56
+Category: Basic PySpark
+Difficulty: Medium
+Type: MCQ
+Question: A daily PySpark job processes two large DataFrames, orders_df and customers_df, with broadcast joins disabled. The team is reviewing the Spark UI to understand which steps create stage boundaries. Which of the following operations trigger a shuffle? (Select all that apply)
+Option A: groupBy("customer_id").agg(F.sum("amount"))
+Option B: filter(F.col("country") == "IN")
+Option C: withColumn("order_year", F.year("order_date"))
+Option D: join(customers_df, "customer_id", "inner")
+----------------------------------------------------------------------------------------------------
+
+Q57
+Category: Basic PySpark
+Difficulty: Medium
+Type: SCQ
+Question: A DataFrame enriched is built by joining three large tables and applying several expensive transformations. It is then used by four separate write actions, each producing a different aggregate. The Spark UI shows the same join stages executing four times. Which change most directly removes the repeated computation?
+Option A: Call enriched.collect() once so the results are stored on the driver.
+Option B: Increase spark.sql.shuffle.partitions so each of the joins runs faster.
+Option C: Convert enriched to an RDD with .rdd so lineage is stored in memory.
+Option D: Persist enriched with cache() before the first action and reuse it.
+----------------------------------------------------------------------------------------------------
+
+Q58
+Category: Basic PySpark
+Difficulty: Medium
+Type: SCQ
+Question: After a selective filter, a DataFrame has 2,000 partitions, most of them nearly empty. Writing it produces 2,000 small Parquet files, which slows downstream queries. The team wants about 50 output files and wants to avoid the cost of a full shuffle. Which statement meets both goals?
+Option A: df.repartition(50).write.parquet(path)
+Option B: df.write.option("maxRecordsPerFile", 50).parquet(path)
+Option C: df.coalesce(50).write.parquet(path)
+Option D: df.write.partitionBy("partition_id").parquet(path)
+----------------------------------------------------------------------------------------------------
+
+Q59
+Category: Basic PySpark
+Difficulty: Medium
+Type: SCQ
+Question: A customer data job applies a Python UDF that lower-cases and trims email addresses and extracts the domain, across 800 million rows. The stage is very slow, and profiling shows most time spent serialising rows between the JVM and Python worker processes. Which change is most effective?
+Option A: Increase the number of Python workers by raising executor memory.
+Option B: Replace the UDF with built-ins such as F.lower and F.split.
+Option C: Wrap the UDF logic in a lambda so Spark can compile it for the JVM.
+Option D: Call df.toPandas() and apply the same function with Pandas apply().
+----------------------------------------------------------------------------------------------------
+
+Q60
+Category: Basic PySpark
+Difficulty: Hard
+Type: MCQ
+Question: On Spark 3.x, a job joins transactions (2 billion rows) with merchants (50 million rows) on merchant_id. A single marketplace merchant accounts for 35% of all transactions. In the join stage, 199 of 200 tasks finish in about 2 minutes, while one task runs for 3 hours and then fails with executor OOM. Which actions address this problem? (Select all that apply)
+Option A: Raise spark.sql.shuffle.partitions so that the hot key gets spread out.
+Option B: Enable AQE skew join handling so that oversized partitions get split.
+Option C: Salt the hot merchant_id with a random suffix to spread its rows out.
+Option D: Replace the join with a cross join and then filter on merchant_id after.
+----------------------------------------------------------------------------------------------------
+
+Q61
+Category: Basic PySpark
+Difficulty: Easy
+Type: SCQ
+Question: A PySpark application is submitted to a YARN cluster and receives 30 executors. A new team member asks which component turns the DataFrame code into a plan of stages and then schedules the individual tasks on the executors. Which answer is correct?
+Option A: The cluster manager, which also executes the tasks on worker nodes.
+Option B: Each executor, which plans its own stages from the code it receives.
+Option C: The Hive metastore, which stores the physical plan for every job run.
+Option D: The driver, which builds the plan and sends tasks to the executors.
+----------------------------------------------------------------------------------------------------
+
+Q62
+Category: Basic PySpark
+Difficulty: Medium
+Type: SCQ
+Question: A job runs df.groupBy("store_id").agg(F.sum("revenue")) on a 2 GB dataset that is read into 16 partitions. Adaptive Query Execution is disabled. The Spark UI shows that the stage after the shuffle has exactly 200 tasks, most of which process only a few kilobytes. Why does this stage have 200 tasks?
+Option A: spark.sql.shuffle.partitions defaults to 200 and sets shuffle outputs.
+Option B: Spark creates one task per distinct store_id value found in the data.
+Option C: Executor count is multiplied by cores per executor to fix the task count.
+Option D: groupBy always uses the input file count times the replication factor.
+----------------------------------------------------------------------------------------------------
+
+Q63
+Category: Basic PySpark
+Difficulty: Medium
+Type: SCQ
+Question: A retail job joins a 3-billion-row sales DataFrame with country_dim, which has 250 rows (about 2 MB), on country_code. The Spark UI shows hundreds of gigabytes of sales data being shuffled across the cluster for this join. Which change most directly removes this shuffle?
+Option A: Repartition the sales DataFrame by country_code before running the join.
+Option B: Cache the sales DataFrame so shuffle data is kept in memory for reuse.
+Option C: Use F.broadcast(country_dim) so each executor joins with a local copy.
+Option D: Convert country_dim to Pandas and loop over sales rows to match codes.
+----------------------------------------------------------------------------------------------------
+
+Q64
+Category: Basic PySpark
+Difficulty: Hard
+Type: MCQ
+Question: A daily PySpark job builds dim_customer and assigns the surrogate key with F.monotonically_increasing_id(). Analysts notice key values such as 8589934592, and a rerun of the same day's load assigns different keys to some customers, breaking joins with fact tables loaded earlier. Which statements about this function are correct? (Select all that apply)
+Option A: The IDs are unique within a run but are not guaranteed consecutive.
+Option B: The IDs depend on partitioning, so a rerun can give rows different IDs.
+Option C: The IDs are saved in the metastore, so every rerun reuses the same ones.
+Option D: The IDs stay consecutive as long as the input data volume is unchanged.
+----------------------------------------------------------------------------------------------------
+
+Q65
+Category: ETL/Batch Pipeline Concepts
+Difficulty: Easy
+Type: SCQ
+Question: A company migrating to Snowflake uses Fivetran to copy Salesforce and SAP data as-is into raw schemas. Analytics engineers then build cleaned and modelled tables inside Snowflake using SQL models in dbt. Which integration pattern does this describe?
+Option A: ETL, since data is transformed on a separate server before loading
+Option B: ELT, since raw data is loaded first and transformed in the warehouse
+Option C: CDC, since dbt models capture every row change directly from sources
+Option D: Reverse ETL, since data flows from the warehouse back to source apps
+----------------------------------------------------------------------------------------------------
+
+Q66
+Category: ETL/Batch Pipeline Concepts
+Difficulty: Easy
+Type: SCQ
+Question: A bank's data platform team receives four new data requests from different departments. Which request requires a streaming pipeline rather than a batch pipeline?
+Option A: Block a card transaction within 2 seconds when it looks fraudulent
+Option B: Produce the monthly regulatory capital report for the central bank
+Option C: Recalculate every customer's credit score during the weekend window
+Option D: Refresh the branch performance dashboard each morning before 9 AM
+----------------------------------------------------------------------------------------------------
+
+Q67
+Category: ETL/Batch Pipeline Concepts
+Difficulty: Easy
+Type: SCQ
+Question: An order ingestion pipeline enforces the business rule that quantity must be a positive integer. A defect in the returns module starts sending rows with quantity values such as -3, while all other columns look normal. Which data validation check is designed to catch this issue?
+Option A: Uniqueness check on the order_id column
+Option B: Referential integrity check on customer_id
+Option C: Schema check that the quantity column exists
+Option D: Range check that quantity is above zero
+----------------------------------------------------------------------------------------------------
+
+Q68
+Category: ETL/Batch Pipeline Concepts
+Difficulty: Medium
+Type: SCQ
+Question: A source PostgreSQL orders table holds 400 million rows. About 200,000 rows are inserted or updated each day, and every row has a reliable, indexed updated_at column. The current nightly full extract takes 5 hours and puts heavy load on the source database. Which extraction approach should the team adopt?
+Option A: Extract all rows nightly but compress the output to cut transfer time.
+Option B: Extract only the rows whose order_id exceeds the maximum loaded order_id.
+Option C: Extract rows with updated_at past the last stored watermark, then merge.
+Option D: Extract a random 5% sample nightly and do a full extract every month.
+----------------------------------------------------------------------------------------------------
+
+Q69
+Category: ETL/Batch Pipeline Concepts
+Difficulty: Medium
+Type: MCQ
+Question: A mobile app buffers user events while offline and uploads them up to 3 days later. A daily batch job at 01:00 filters events whose event_timestamp falls on the previous day, computes daily active users, and overwrites that date's summary. Weeks later, audits show higher daily active user counts than the published figures. Which statements are correct? (Select all that apply)
+Option A: Filtering on upload time instead of event time fixes the per-day counts.
+Option B: Running the daily job earlier, at 00:05, would also capture late events.
+Option C: Events arriving after the run are excluded from that day's summary.
+Option D: Reprocessing a rolling window of the last 3 days corrects the counts.
+----------------------------------------------------------------------------------------------------
+
+Q70
+Category: ETL/Batch Pipeline Concepts
+Difficulty: Medium
+Type: SCQ
+Question: A daily vendor file contains 2 million rows. About 0.3% of rows fail validation because of malformed dates, and the pipeline currently fails entirely, delaying reports for all vendors. The business accepts a partial load if rejected rows are traceable and the error rate stays below 1%. Which design meets this requirement?
+Option A: Silently drop invalid rows and load the remaining rows without logging.
+Option B: Route invalid rows to a quarantine table and fail the run above 1%.
+Option C: Replace every malformed date with today's date so all the rows load.
+Option D: Disable validation for this vendor until it fixes its export process.
+----------------------------------------------------------------------------------------------------
+
+Q71
+Category: ETL/Batch Pipeline Concepts
+Difficulty: Hard
+Type: SCQ
+Question: A ride-hailing platform counts trips in 5-minute windows based on when each event reaches the processing system. During a network outage in one city, drivers' phones buffer trip events and deliver them 20 minutes later. The dashboard shows a false dip during the outage and a false spike afterwards. Conceptually, which change fixes the counts?
+Option A: Shrink the window to 1 minute so delayed events spread across windows.
+Option B: Increase the stream's partition count so delayed events process sooner.
+Option C: Switch to an hourly batch that still groups events by processing time.
+Option D: Window on event time, with a watermark that allows for late arrivals.
+----------------------------------------------------------------------------------------------------
+
+Q72
+Category: ETL/Batch Pipeline Concepts
+Difficulty: Hard
+Type: SCQ
+Question: A nightly ETL loads fact_orders, while dim_customer is fed from a CRM that lags by about 6 hours. Each night about 2% of new orders reference customer_ids not yet present in dim_customer, and the current process drops them, understating daily revenue. Finance needs complete daily revenue, with customer attributes corrected once the CRM record arrives. Which approach meets this?
+Option A: Add an inferred customer row, load orders, update it when CRM arrives.
+Option B: Drop orphan orders and reload the full fact table weekly to recover them.
+Option C: Load orphan orders with a NULL customer key and never revisit the rows.
+Option D: Delay the entire fact load until the CRM confirms all customers exist.
+----------------------------------------------------------------------------------------------------
+
+Q73
+Category: File Formats & Orchestration Basics
+Difficulty: Easy
+Type: SCQ
+Question: A 2 TB clickstream dataset is stored as CSV. Most analytical queries read only 3 of its 120 columns, yet every query scans the full files and runs slowly. Which storage format most reduces the data read for these queries?
+Option A: JSON Lines, which stores each record as a self-describing object
+Option B: Avro, which stores rows in compact binary blocks with a schema
+Option C: Parquet, which stores data by column so unread ones are skipped
+Option D: CSV with gzip, which compresses each file to reduce stored bytes
+----------------------------------------------------------------------------------------------------
+
+Q74
+Category: File Formats & Orchestration Basics
+Difficulty: Easy
+Type: SCQ
+Question: A finance export script must run on a Linux server at 02:30 every day, according to the server's clock. Using the standard five-field cron format (minute, hour, day of month, month, day of week), which expression schedules it correctly?
+Option A: 2 30 * * *
+Option B: 30 2 * * *
+Option C: * * 2 30 *
+Option D: 30 2 1 * *
+----------------------------------------------------------------------------------------------------
+
+Q75
+Category: File Formats & Orchestration Basics
+Difficulty: Easy
+Type: SCQ
+Question: An engineer defines an Airflow pipeline with tasks extract, transform, quality_check, and load. The dependencies are set as extract >> transform >> quality_check >> load, plus load >> extract so that the pipeline restarts after each load. Airflow refuses to import the DAG. Why?
+Option A: A DAG must be acyclic, and load >> extract creates a cycle.
+Option B: A DAG can contain at most three tasks unless task groups are defined.
+Option C: The >> operator only links tasks that use the same operator class.
+Option D: Quality checks must always run after load, so the order is rejected.
+----------------------------------------------------------------------------------------------------
+
+Q76
+Category: File Formats & Orchestration Basics
+Difficulty: Easy
+Type: SCQ
+Question: An e-commerce integration receives product catalogue records from a partner API. Each product has a nested variants array (size, colour, stock) and a ratings object. The team wants to store the records in a human-readable text format that preserves this nested structure exactly as exchanged. Which format fits best?
+Option A: CSV, as each variant can be placed in its own comma-separated column
+Option B: Plain TXT, as free-form lines avoid needing any defined structure
+Option C: Fixed-width, as padded fields keep each product aligned for reading
+Option D: JSON, as it natively represents nested objects and arrays as text
+----------------------------------------------------------------------------------------------------
+
+Q77
+Category: File Formats & Orchestration Basics
+Difficulty: Medium
+Type: SCQ
+Question: A Kafka topic carries payment events consumed by both Java and Python services. Producers add new optional fields every few months, and existing consumers must keep working without redeployment. The team uses a schema registry and wants a compact binary encoding per message. Which format is most suitable?
+Option A: CSV, as adding a new column at the end never breaks existing readers
+Option B: Parquet, as its columnar layout makes single-event writes efficient
+Option C: Avro, as its compact rows carry a schema that supports evolution
+Option D: JSON, as its text encoding enforces field types for all consumers
+----------------------------------------------------------------------------------------------------
+
+Q78
+Category: File Formats & Orchestration Basics
+Difficulty: Medium
+Type: MCQ
+Question: A platform team is reviewing the crontab entries used to trigger batch jobs. All entries use the standard five-field cron format (minute, hour, day of month, month, day of week). Which descriptions of the expressions are correct? (Select all that apply)
+Option A: "0 6 1 * *" runs at 06:00 on the first day of every month.
+Option B: "0 6 * * 1" runs at 06:00 on the first day of every month.
+Option C: "*/15 * * * *" runs once, at minute 15 of every hour.
+Option D: "0 9 * * 1-5" runs at 09:00 on weekdays, Monday to Friday.
+----------------------------------------------------------------------------------------------------
+
+Q79
+Category: File Formats & Orchestration Basics
+Difficulty: Medium
+Type: SCQ
+Question: A new Airflow DAG has a @daily schedule, a start_date 90 days in the past, and catchup left at its default of True. When the DAG is enabled, the scheduler queues 90 runs that overload the source database. The team only wants runs from the current interval onwards. Which setting achieves this?
+Option A: Set retries=0 so that the historical runs fail fast and get skipped.
+Option B: Set catchup=False so only the latest interval gets scheduled.
+Option C: Change the schedule to @once so the DAG runs a single time overall.
+Option D: Set max_active_runs=90 so all the missed runs finish together faster.
+----------------------------------------------------------------------------------------------------
+
+Q80
+Category: File Formats & Orchestration Basics
+Difficulty: Medium
+Type: MCQ
+Question: A data platform is migrating 5 TB of gzip-compressed CSV files to Snappy-compressed Parquet for use with Spark. The architecture review lists expected benefits and trade-offs. Which statements are correct? (Select all that apply)
+Option A: A single large gzip CSV file can be split and read in parallel by Spark.
+Option B: Row-group min/max statistics let engines skip data that fails a filter.
+Option C: Parquet files embed the schema, so column types need not be inferred.
+Option D: Parquet is row-oriented, which makes single-record updates faster.
+----------------------------------------------------------------------------------------------------
