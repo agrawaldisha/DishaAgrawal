@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unity Catalog Handbook | Databricks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f6f7f4;
+    --panel: #ffffff;
+    --panel-2: #eef1eb;
+    --ink: #1e2a24;
+    --ink-soft: #4a5750;
+    --line: #dcdfd6;
+    --brand: #205e4d;
+    --brand-deep: #123c30;
+    --accent: #b8722e;
+    --accent-soft: #f1e3d2;
+    --radius: 6px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top: 24px;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
+    line-height:1.6;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  h1,h2,h3{
+    font-family:'Lora',Georgia,serif;
+    color:var(--brand-deep);
+    line-height:1.25;
+    margin:0 0 .5em 0;
+  }
+  a{color:var(--brand);}
+  code, .mono{font-family:'IBM Plex Mono',monospace; font-size:.85em;}
+
+  /* Layout */
+  main{
+    max-width:820px;
+    margin:0 auto;
+    padding:52px 32px 80px 32px;
+  }
+  .doc-header{
+    border-bottom:2px solid var(--brand-deep);
+    padding-bottom:22px;
+    margin-bottom:36px;
+  }
+  .doc-header .kicker{
+    font-size:.8rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .doc-header h1{font-size:2.1rem;}
+  .doc-header p{color:var(--ink-soft); max-width:62ch; margin-top:8px;}
+
+  section{margin-bottom:46px; scroll-margin-top:24px;}
+  section .num{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:2px 8px;
+    border-radius:4px;
+    margin-bottom:10px;
+  }
+  section h2{font-size:1.5rem;}
+  section h3{font-size:1.1rem; color:var(--brand); margin-top:22px;}
+  section p{max-width:74ch; color:var(--ink);}
+  section ul, section ol{max-width:74ch; padding-left:1.2em; margin:10px 0;}
+  section li{margin-bottom:6px;}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 22px;
+    margin:16px 0;
+  }
+  .grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .callout{
+    background:var(--panel-2);
+    border-left:3px solid var(--brand);
+    padding:12px 18px;
+    border-radius:0 var(--radius) var(--radius) 0;
+    font-size:.93rem;
+    color:var(--ink-soft);
+    margin:14px 0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    margin:14px 0;
+    font-size:.92rem;
+  }
+  th,td{
+    text-align:left;
+    padding:10px 14px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  th{background:var(--panel-2); color:var(--brand-deep); font-weight:600;}
+  tr:last-child td{border-bottom:none;}
+
+  .hierarchy{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin:16px 0;
+  }
+  .hlevel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:4px solid var(--brand);
+    border-radius:4px;
+    padding:8px 14px;
+    font-size:.9rem;
+  }
+  .hlevel b{color:var(--brand-deep);}
+  .hlevel.l2{margin-left:22px; border-left-color:var(--accent);}
+  .hlevel.l3{margin-left:44px; border-left-color:#8a8f7f;}
+  .hlevel.l4{margin-left:66px; border-left-color:#b7bcae;}
+
+  .steps{list-style:none; padding:0; counter-reset:step;}
+  .steps li{
+    counter-increment:step;
+    position:relative;
+    padding-left:38px;
+    margin-bottom:12px;
+  }
+  .steps li::before{
+    content:counter(step);
+    position:absolute;
+    left:0; top:0;
+    width:26px; height:26px;
+    background:var(--brand);
+    color:#fff;
+    border-radius:50%;
+    font-size:.78rem;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding-top:18px;
+    color:var(--ink-soft);
+    font-size:.82rem;
+  }
+
+  @media (max-width: 700px){
+    main{padding:32px 20px 60px;}
+    .grid-2{grid-template-columns:1fr;}
+    .hlevel.l2{margin-left:14px;} .hlevel.l3{margin-left:28px;} .hlevel.l4{margin-left:42px;}
+  }
+</style>
+</head>
+<body>
+  <main>
+    <header class="doc-header">
+      <div class="kicker">HANDBOOK</div>
+      <h1>Unity Catalog on Databricks</h1>
+      <p>A concise reference covering the Databricks platform and a complete walkthrough of Unity Catalog &mdash; governance, architecture, and data sharing.</p>
+    </header>
+
+    <!-- 1 -->
+    <section id="what-is-databricks">
+      <span class="num">01</span>
+      <h2>What is Databricks?</h2>
+      <p>Databricks is a unified, cloud-based data platform built around the <b>Lakehouse</b> architecture &mdash; combining the low-cost, flexible storage of a data lake with the reliability and performance of a data warehouse.</p>
+      <ul>
+        <li>Runs on top of your cloud storage (AWS S3, Azure ADLS, GCS) using the open <b>Delta Lake</b> format.</li>
+        <li>Provides a single environment for data engineering, SQL analytics, machine learning, and BI.</li>
+        <li>Offered on AWS, Azure, and GCP, with autoscaling Spark-based compute clusters.</li>
+        <li>Founded by the original creators of Apache Spark, Delta Lake, and MLflow.</li>
+      </ul>
+    </section>
+
+    <!-- 2 -->
+    <section id="what-is-uc-intro">
+      <span class="num">02</span>
+      <h2>What is Unity Catalog? (At a Glance)</h2>
+      <p>Unity Catalog (UC) is Databricks' unified governance layer for all data and AI assets. It provides one place to manage <b>permissions, auditing, lineage, and discovery</b> across every workspace in an account &mdash; instead of managing access separately per cluster or workspace.</p>
+      <div class="callout">Think of it as the central "control tower" that governs who can see and use what data, everywhere in your Databricks account.</div>
+    </section>
+
+    <!-- 3 -->
+    <section id="free-edition">
+      <span class="num">03</span>
+      <h2>Databricks Account Login &mdash; Free Edition</h2>
+      <p>Databricks offers a Free Edition for learning and experimentation, with Unity Catalog enabled by default.</p>
+      <ol class="steps">
+        <li>Go to <span class="mono">databricks.com/try-databricks</span> and choose the <b>Free Edition</b> option.</li>
+        <li>Sign up with an email address (or continue with Google/Microsoft SSO) and verify your email.</li>
+        <li>Select or create a workspace &mdash; a Free Edition workspace is auto-provisioned with a starter Unity Catalog metastore.</li>
+        <li>Log in to the workspace at your assigned URL, e.g. <span class="mono">&lt;workspace&gt;.cloud.databricks.com</span>.</li>
+        <li>Explore <b>Catalog Explorer</b> from the left sidebar to see the default catalogs already attached.</li>
+      </ol>
+      <div class="callout">Free Edition has usage and compute limits compared to a paid account, but it is fully sufficient to practice Unity Catalog concepts.</div>
+    </section>
+
+    <!-- 4 -->
+    <section id="architecture">
+      <span class="num">04</span>
+      <h2>Databricks Architecture (Overview)</h2>
+      <p>Databricks separates responsibilities across two planes:</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="margin-top:0;">Control Plane</h3>
+          <p style="margin:0;">Managed by Databricks. Hosts the web UI, job scheduler, cluster manager, and Unity Catalog's governance APIs.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0;">Data Plane</h3>
+          <p style="margin:0;">Runs in <em>your</em> cloud account. Compute clusters process data that stays in your own storage.</p>
+        </div>
+      </div>
+      <p>Core layers of the platform:</p>
+      <ul>
+        <li><b>Storage layer</b> &mdash; cloud object storage holding Delta Lake tables.</li>
+        <li><b>Compute layer</b> &mdash; Spark clusters, SQL warehouses, and serverless compute.</li>
+        <li><b>Governance layer</b> &mdash; Unity Catalog, spanning every workspace in the account.</li>
+        <li><b>Workspace layer</b> &mdash; notebooks, jobs, dashboards, and ML experiments.</li>
+      </ul>
+    </section>
+
+    <hr style="border:none; border-top:1px solid var(--line); margin:40px 0;">
+
+    <!-- 5 -->
+    <section id="uc-definition">
+      <span class="num">05</span>
+      <h2>What is Unity Catalog?</h2>
+      <p>Unity Catalog is a <b>unified governance solution</b> for all data and AI assets across Databricks workspaces. It centralizes metadata, access control, auditing, lineage, and data discovery under one consistent model, regardless of which cloud or workspace the data lives in.</p>
+      <ul>
+        <li>One metastore can be shared by multiple workspaces in a region.</li>
+        <li>Governs tables, views, volumes (files), ML models, functions, and dashboards &mdash; not just tables.</li>
+        <li>Access rules are defined once and enforced everywhere consistently.</li>
+      </ul>
+    </section>
+
+    <!-- 6 -->
+    <section id="uc-features">
+      <span class="num">06</span>
+      <h2>Key Features</h2>
+      <table>
+        <tr><th>Feature</th><th>What it gives you</th></tr>
+        <tr><td>Centralized access control</td><td>One permission model (SQL GRANT/REVOKE) for all data assets.</td></tr>
+        <tr><td>Automated lineage</td><td>Table &amp; column-level lineage captured automatically, no manual tagging.</td></tr>
+        <tr><td>Data discovery</td><td>Searchable catalog with tags, comments, and descriptions.</td></tr>
+        <tr><td>Auditing</td><td>Every access and query logged for compliance.</td></tr>
+        <tr><td>Delta Sharing</td><td>Secure sharing of data across organizations without copying it.</td></tr>
+        <tr><td>Unified assets</td><td>Governs tables, volumes, models, and functions under one model.</td></tr>
+        <tr><td>System tables</td><td>Built-in operational tables for billing, audit, and lineage queries.</td></tr>
+      </table>
+    </section>
+
+    <!-- 7 -->
+    <section id="uc-architecture">
+      <span class="num">07</span>
+      <h2>Architecture &amp; Components</h2>
+      <p>Unity Catalog's architecture sits between workspaces and cloud storage:</p>
+      <ul>
+        <li><b>Metastore</b> &mdash; the top-level container for metadata; one per region, attached to one or more workspaces.</li>
+        <li><b>Catalog Explorer</b> &mdash; the UI for browsing, searching, and managing governed objects.</li>
+        <li><b>Storage credentials &amp; external locations</b> &mdash; securely link UC to cloud storage paths without exposing raw cloud keys.</li>
+        <li><b>Access Connector / Managed Identity</b> &mdash; the cloud-side identity UC uses to read and write storage on your behalf.</li>
+        <li><b>Unity Catalog metadata store</b> &mdash; Databricks-managed backend recording all objects, permissions, and lineage events.</li>
+      </ul>
+      <div class="callout">A single metastore can be attached to many workspaces, so permissions defined once apply consistently across all of them.</div>
+    </section>
+
+    <!-- 8 -->
+    <section id="uc-hierarchy">
+      <span class="num">08</span>
+      <h2>Object Hierarchy</h2>
+      <p>Unity Catalog organizes data using a strict three-level namespace, plus the objects within it:</p>
+      <div class="hierarchy">
+        <div class="hlevel"><b>Metastore</b> &mdash; top-level container (per region)</div>
+        <div class="hlevel l2"><b>Catalog</b> &mdash; groups related schemas (e.g. <span class="mono">sales</span>, <span class="mono">finance</span>)</div>
+        <div class="hlevel l3"><b>Schema (Database)</b> &mdash; groups related objects (e.g. <span class="mono">raw</span>, <span class="mono">curated</span>)</div>
+        <div class="hlevel l4"><b>Tables &middot; Views &middot; Volumes &middot; Functions &middot; Models</b></div>
+      </div>
+      <p>A fully-qualified object name always follows: <span class="mono">catalog.schema.object</span> &mdash; e.g. <span class="mono">sales.curated.orders</span>.</p>
+    </section>
+
+    <!-- 9 -->
+    <section id="uc-vs-metastore">
+      <span class="num">09</span>
+      <h2>Unity Catalog vs. Hive Metastore</h2>
+      <table>
+        <tr><th>Aspect</th><th>Hive Metastore (legacy)</th><th>Unity Catalog</th></tr>
+        <tr><td>Scope</td><td>Per-workspace</td><td>Account-wide, shared across workspaces</td></tr>
+        <tr><td>Namespace</td><td>Two-level: schema.table</td><td>Three-level: catalog.schema.table</td></tr>
+        <tr><td>Access control</td><td>Table ACLs, cluster-based, inconsistent</td><td>Fine-grained SQL GRANTs, centralized</td></tr>
+        <tr><td>Lineage</td><td>Not built-in</td><td>Automatic, column-level</td></tr>
+        <tr><td>Asset types</td><td>Tables &amp; views only</td><td>Tables, views, volumes, models, functions</td></tr>
+        <tr><td>Cross-org sharing</td><td>Not supported natively</td><td>Delta Sharing built-in</td></tr>
+      </table>
+    </section>
+
+    <!-- 10 -->
+    <section id="governance">
+      <span class="num">10</span>
+      <h2>Data Governance &amp; Access Control</h2>
+      <p>Unity Catalog enforces governance through standard SQL, applied consistently to every object in the hierarchy.</p>
+      <ul>
+        <li><b>Grant/Revoke model</b> &mdash; permissions (<span class="mono">SELECT</span>, <span class="mono">MODIFY</span>, <span class="mono">USE CATALOG</span>, etc.) assigned to users or groups.</li>
+        <li><b>Inheritance</b> &mdash; privileges granted at catalog or schema level flow down to child objects.</li>
+        <li><b>Row &amp; column-level security</b> &mdash; row filters and column masks restrict sensitive data dynamically.</li>
+        <li><b>Attribute-based access control (ABAC)</b> &mdash; policies driven by tags rather than object-by-object grants.</li>
+        <li><b>Audit logging</b> &mdash; every read, write, and permission change is captured for compliance reviews.</li>
+      </ul>
+    </section>
+
+    <!-- 11 -->
+    <section id="lineage">
+      <span class="num">11</span>
+      <h2>Data Lineage &amp; Discovery</h2>
+      <ul>
+        <li><b>Automatic lineage</b> &mdash; captured at both table and column level for every read/write, with no extra configuration.</li>
+        <li><b>Lineage graph</b> &mdash; visualizes upstream sources and downstream consumers directly in Catalog Explorer.</li>
+        <li><b>Impact analysis</b> &mdash; quickly see what breaks downstream before changing a table.</li>
+        <li><b>Search &amp; discovery</b> &mdash; keyword search across catalogs, with tags, comments, and descriptions to aid findability.</li>
+        <li><b>System tables</b> &mdash; queryable lineage and audit data for building custom governance dashboards.</li>
+      </ul>
+    </section>
+
+    <!-- 12 -->
+    <section id="sharing">
+      <span class="num">12</span>
+      <h2>Delta Sharing</h2>
+      <p>Delta Sharing is Unity Catalog's open protocol for sharing live data <b>across organizations and platforms</b> &mdash; without copying or replicating it.</p>
+      <ul>
+        <li>Recipients can be on Databricks or any Delta Sharing-compatible tool (Power BI, pandas, Spark, etc.).</li>
+        <li>Data is shared directly from your storage; the recipient always reads the latest version.</li>
+        <li>Shares are governed objects too &mdash; access is granted, audited, and revoked like any other UC asset.</li>
+        <li>Ideal for vendor/partner data exchange, monetization, and multi-cloud collaboration.</li>
+      </ul>
+      <div class="callout">In summary: Databricks fundamentals, Unity Catalog's model, and how governed data can be securely shared beyond your own workspace all work together end-to-end.</div>
+    </section>
+
+    <!-- 13 -->
+    <section id="secrets">
+      <span class="num">13</span>
+      <h2>Unity Catalog Secrets</h2>
+      <p>Secrets are now first-class <b>Unity Catalog securable objects</b>, addressed with the same three-level namespace as every other asset:</p>
+      <div class="card"><span class="mono">catalog.schema.secret</span></div>
+      <ul>
+        <li>Brings secrets into the UC governance model &mdash; fine-grained privileges (grant/revoke) instead of workspace-scoped secret ACLs.</li>
+        <li>Consistent namespace and discovery alongside tables, volumes, and models.</li>
+        <li><b>Status:</b> Generally Available (GA)</li>
+      </ul>
+    </section>
+
+    <!-- 14 -->
+    <section id="questions">
+      <span class="num">14</span>
+      <h2>Discussion Questions</h2>
+      <p>Use these to check and reinforce understanding of the concepts above.</p>
+      <ol class="steps">
+        <li>What is Unity Catalog, and why do we need it in Databricks?</li>
+        <li>How does Unity Catalog enhance data governance and security?</li>
+        <li>What are the key components of Unity Catalog? (Metastore, Catalog, Schema, Tables)</li>
+        <li>How is Unity Catalog different from Hive Metastore?</li>
+        <li>What are the different permission levels in Unity Catalog?</li>
+        <li>How do you enable Unity Catalog in an existing Databricks workspace?</li>
+        <li>What are Managed Tables and External Tables in Unity Catalog?</li>
+        <li>How does Unity Catalog handle data lineage and auditing?</li>
+        <li>What authentication and access control mechanisms does Unity Catalog support?</li>
+        <li>How do you register an external storage location with Unity Catalog?</li>
+      </ol>
+    </section>
+
+    <footer>
+      Unity Catalog Handbook &middot; Databricks Reference Guide
+    </footer>
+  </main>
+</body>
+</html>
